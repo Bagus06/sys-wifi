@@ -62,6 +62,14 @@
 	    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
 	})
 </script>
+<?php
+if($this->uri->uri_string == 'pelanggan/edit')
+{
+	?>
+	<script src="<?php echo base_url('assets/js/pelanggan.js');?>"></script>
+	<?php
+}
+?>
 <?php if ($this->uri->rsegments[2] == 'folder'): ?>
 	<script>
 		$(function () {
