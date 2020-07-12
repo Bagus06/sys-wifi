@@ -12,7 +12,8 @@ function set_option(select,data)
     }
 }
 $(document).ready(function(){
-    var _URL = "http://localhost/sipapat";
+    // var _URL = "http://localhost/sipapat";//local
+    var _URL = "https://sipapat.patikab.go.id";//server
     var api_provinces = _URL+"/admin/provinces/all";
     var api_regencies = _URL+"/admin/regencies/all";
     var api_districts = _URL+"/admin/districts/all";
