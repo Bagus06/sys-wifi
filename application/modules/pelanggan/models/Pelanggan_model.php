@@ -88,8 +88,14 @@ class Pelanggan_model extends CI_model
 						'user_id' => get_user()['id'],
 						'nama' => $data['nama'],
 						'no_tlp' => $data['no_tlp'],
+						'prov' => $data['prov'],
+						'prov_id' => $data['prov_id'],
 						'kab' => $data['kab'],
+						'kab_id' => $data['kab_id'],
 						'kec' => $data['kec'],
+						'kec_id' => $data['kec_id'],
+						'desa' => $data['desa'],
+						'desa_id' => $data['desa_id'],
 						'alamat' => $data['alamat'],
 						'alat_biaya' => $data['alat_biaya'],
 						'nik' => $data['nik'],
@@ -110,15 +116,21 @@ class Pelanggan_model extends CI_model
 				if (empty($exist)) {
 
 					if (empty($data['kordinat'])) {
-						$data['kordinat'] = '-';
+						$data['kordinat'] = $data['koordinat'];
 					}
 
 					if ($this->db->insert('pelanggan', [
 						'user_id' => get_user()['id'],
 						'nama' => $data['nama'],
 						'no_tlp' => $data['no_tlp'],
+						'prov' => $data['prov'],
+						'prov_id' => $data['prov_id'],
 						'kab' => $data['kab'],
+						'kab_id' => $data['kab_id'],
 						'kec' => $data['kec'],
+						'kec_id' => $data['kec_id'],
+						'desa' => $data['desa'],
+						'desa_id' => $data['desa_id'],
 						'alamat' => $data['alamat'],
 						'alat_biaya' => $data['alat_biaya'],
 						'nik' => '-',
@@ -271,7 +283,6 @@ class Pelanggan_model extends CI_model
 					$this->db->order_by('a.updated ASC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
-						// $this->db->or_like('a.alamat', $search);
 						$this->db->like('a.active', 2);
 					}
 					$this->db->where('active', 2);
@@ -280,7 +291,6 @@ class Pelanggan_model extends CI_model
 					$this->db->order_by('a.updated ASC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
-						// $this->db->or_like('a.alamat', $search);
 						$this->db->like('a.active', 3);
 					}
 					$this->db->where('active', 3);
@@ -288,7 +298,6 @@ class Pelanggan_model extends CI_model
 					$this->db->order_by('a.updated ASC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
-						// $this->db->or_like('a.alamat', $search);
 						$this->db->like('a.active', 1);
 					}
 					$this->db->where('active', 1);
@@ -296,7 +305,6 @@ class Pelanggan_model extends CI_model
 					$this->db->order_by('a.updated ASC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
-						// $this->db->or_like('a.alamat', $search);
 						$this->db->like('a.active', 4);
 					}
 					$this->db->where('active', 4);
@@ -304,7 +312,6 @@ class Pelanggan_model extends CI_model
 					$this->db->order_by('a.updated ASC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
-						// $this->db->or_like('a.alamat', $search);
 						$this->db->like('a.active', 5);
 					}
 					$this->db->where('active', 5);

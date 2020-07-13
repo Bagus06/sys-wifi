@@ -72,7 +72,7 @@
 										<tr>
 											<td>Alamat </td>
 											<td>:</td>
-											<td><?php echo $data['alamat']; ?> / Kec.<?php echo $data['kec']; ?> / Kab.<?php echo $data['kab'] ?></td>
+											<td><?php echo $data['alamat']; ?> - Ds.<?php echo $data['desa'] ?> / Kec.<?php echo $data['kec']; ?> / Kab.<?php echo $data['kab'] ?></td>
 										</tr>
 										<tr>
 											<td>Pekerjaan </td>

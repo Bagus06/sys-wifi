@@ -48,7 +48,7 @@
 									 ?>
 									<h2 class="lead"><b><i class="fas fa-lg fa-network-wired" style="color:<?php echo $color; ?>"></i> <?php echo $value['nama'] ?></b></h2>
 									<ul class="ml-4 mb-0 fa-ul text-muted">
-										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-map-marked-alt"></i></span> Alamat : <?php echo $value['alamat']; ?>-Kec.<?php echo $value['kec']; ?>-Kab.<?php echo $value['kab']; ?></li>
+										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-map-marked-alt"></i></span> Alamat : <?php echo $value['alamat']; ?>-Ds.<?php echo $value['desa']; ?>-Kec.<?php echo $value['kec']; ?>-Kab.<?php echo $value['kab']; ?></li>
 										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-map-pin"></i></span> kordinat : <?php echo $value['kordinat'] ?></li>
 										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telephone : <?php echo $value['no_tlp'] ?> </li>
 										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-lg fa-bookmark"></i></span> no pelanggan : <?php echo $value['no_pelanggan'] ?></li>

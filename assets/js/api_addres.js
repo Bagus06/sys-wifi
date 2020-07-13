@@ -3,7 +3,8 @@ $(document).ready(function(){
 	var villages;
 	var config_kab;
 	var desa;
-	var _URL = 'https://sipapat.patikab.go.id/';
+	// var _URL = 'https://sipapat.patikab.go.id/';
+	var _URL = 'http://localhost/sipapat/';
 
 	$.ajax({
 		type:'post',
