@@ -83,3 +83,6 @@
 		</div>
 	</form>
 </div>
+<script>
+	var _URL = "<?php echo base_url();?>";
+</script>

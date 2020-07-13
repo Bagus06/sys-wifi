@@ -12,12 +12,10 @@ function set_option(select,data)
     }
 }
 $(document).ready(function(){
-    // var _URL = "http://localhost/sipapat";//local
-    var _URL = "https://sipapat.patikab.go.id";//server
-    var api_provinces = _URL+"/admin/provinces/all";
-    var api_regencies = _URL+"/admin/regencies/all";
-    var api_districts = _URL+"/admin/districts/all";
-    var api_villages = _URL+"/admin/villages/by_district_id/";
+    var api_provinces = _URL+"/pelanggan/get_provinces/";
+    var api_regencies = _URL+"/pelanggan/get_regencies/";
+    var api_districts = _URL+"/pelanggan/get_districts/";
+    var api_villages = _URL+"/pelanggan/get_villages/";
     $.getJSON(api_provinces,function(result){
         var option = result;
         var tmp = [{'text':'None','value':'0','selected':'true'}];
