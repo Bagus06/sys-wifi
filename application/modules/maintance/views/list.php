@@ -27,6 +27,9 @@
                 Nama pelanggan
               </th>
               <th>
+                Team
+              </th>
+              <th>
                 Keluhan
               </th>
               <?php if (!empty($this->input->get('fm'))): ?>
@@ -51,12 +54,15 @@
                 </td>
                 <td>
                   <a>
-                    <?php echo $value['nama'] ?>
+                    <?php echo $value['nama'] . $value['user_id'] ?>
                   </a>
                   <br/>
                   <small>
-                    <?php echo echo_date($value['komplain_c']); ?> | <?php echo echo_time($value['komplain_c']); ?>
+                    <?php echo echo_date($value['created']); ?> | <?php echo echo_time($value['created']); ?>
                   </small>
+                </td>
+                <td>
+                  <?php echo get_name($value['user_id']); ?>
                 </td>
                 <td>
                   <?php echo $value['keluhan'] ?>
@@ -87,6 +93,9 @@
                     }
                   ?>
                   <span class="badge badge-<?php echo $status; ?>"><?php echo $text; ?></span>
+                  <?php if ($value['status'] == 3): ?>
+                    <i class="fas fa-level-down-alt"></i>
+                  <?php endif ?>
                 </td>
                 <td class="project-actions text-right">
                   <?php
@@ -98,12 +107,12 @@
                       <a href="<?php echo base_url('pemasangan/edit/' . $value['pelanggan_id']) ?>" class="btn btn-sm bg-warning">
                         <i class="fas fa-satellite-dish"></i> Update alat
                       </a>
-                      <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-maintance<?php echo $value['maintance_id'] ?>">
+                      <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-maintance<?php echo $value['id'] ?>">
                         <i class="fas fa-file-signature"></i> Laporan belum selesai
                       </button>
-                      <div class="modal fade" id="modal-maintance<?php echo $value['maintance_id'] ?>">
+                      <div class="modal fade" id="modal-maintance<?php echo $value['id'] ?>">
                         <div class="modal-dialog">
-                          <form action="<?php echo base_url('maintance/ubah_status/' . $value['maintance_id'] . '?maintance=3') ?>" method="post">
+                          <form action="<?php echo base_url('maintance/ubah_status/' . $value['id'] . '?maintance=3') ?>" method="post">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h4 style="color:black" class="modal-title">Laporan belum selesai</h4>
@@ -132,20 +141,20 @@
                   <?php if (!empty($bind_fm)): ?>
                     <?php if ($bind_fm != 4): ?>
                       <?php if($bind_fm == 1): ?>
-                        <a class="btn btn-info btn-sm" href="<?php echo base_url('maintance/ubah_status/' . $value['maintance_id'] . '?maintance=2') ?>">
+                        <a class="btn btn-info btn-sm" href="<?php echo base_url('maintance/ubah_status/' . $value['id'] . '?maintance=2') ?>">
                           <i class="fas fa-toolbox">
                           </i>
                           Mulai Maintance
                         </a>
                       <?php elseif($bind_fm == 2 || $bind_fm == 3): ?>
-                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-selesai<?php echo $value['maintance_id'] ?>">
+                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-selesai<?php echo $value['id'] ?>">
                          <i class="fas fa-toolbox">
                           </i>
                           Maintance Selesai
                         </button>
-                        <div class="modal fade" id="modal-selesai<?php echo $value['maintance_id'] ?>">
+                        <div class="modal fade" id="modal-selesai<?php echo $value['id'] ?>">
                           <div class="modal-dialog">
-                            <form action="<?php echo base_url('maintance/ubah_status/' . $value['maintance_id'] . '?maintance=4') ?>" method="post">
+                            <form action="<?php echo base_url('maintance/ubah_status/' . $value['id'] . '?maintance=4') ?>" method="post">
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h4 style="color:black" class="modal-title">Solusi dari keluhan maintance</h4>
@@ -172,11 +181,19 @@
                       <?php endif ?>
                     <?php endif ?>
                     <?php if ($bind_fm == 4): ?>
-                      <?php echo echo_date($value['komplain_u']); ?> | <?php echo echo_time($value['komplain_u']); ?>
+                      <?php echo echo_date($value['updated']); ?> | <?php echo echo_time($value['updated']); ?>
                     <?php endif ?>
                   <?php endif ?>
                 </td>
               </tr>
+              <?php if ($value['status'] == 3): ?>
+                <tr>
+                  <td></td>
+                   <td colspan="5">
+                     <?php echo $value['alasan'] ?>
+                   </td>
+                </tr>
+               <?php endif ?>
             <?php endforeach ?>
           </tbody>
         </table>

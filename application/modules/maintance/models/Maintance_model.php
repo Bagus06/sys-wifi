@@ -7,12 +7,23 @@ class Maintance_model extends CI_model
 		$msg = [];
 		$filter = $this->input->get('fm');
 
-		$this->db->select('*, a.created komplain_c, a.updated komplain_u, a.id maintance_id');
+		$this->db->select('
+			a.created,
+			a.updated,
+			a.id,
+			a.user_id,
+			a.pelanggan_id,
+			b.nama,
+			keluhan,
+			solusi,
+			alasan,
+			status,
+		');
 		$this->db->from('maintance a');
 		$this->db->join('pelanggan b', 'b.id=a.pelanggan_id', 'inner');
 		if (!empty($filter)) {
 			$this->db->order_by('a.updated ASC, b.nama ASC');
-			$this->db->where('status', $filter);	
+			$this->db->where('status', $filter);
 		}else{
 			$this->db->order_by('a.created ASC, b.nama ASC');
 			$this->db->where('status', 1);
@@ -38,7 +49,7 @@ class Maintance_model extends CI_model
 		$maintance = $this->input->get('maintance');
 		$pelanggan_id = $this->input->get('pelanggan');
 		$data = $this->input->post();
-		$user_id = get_user()['id'];
+		$get_user_id = get_user()['id'];
 
 
 		if (!empty($id)) {
@@ -62,13 +73,18 @@ class Maintance_model extends CI_model
 				$solusi = '-';
 			}
 
-			// print_r($solusi);die;
+			if (!empty($this->input->post('laporan'))) {
+				$alasan = $this->input->post('laporan');
+			}else{
+				$alasan = $exits['alasan'];
+			}
 
 			if (!empty($maintance)) {
 				$this->db->set([
 					'solusi' => $solusi,
 					'status' => $maintance,
-					'user_id' => $user_id,
+					'alasan' => $this->input->post('laporan'),
+					'user_id' => $get_user_id,
 				]);
 				$this->db->where('id', $id);
 				if ($this->db->update('maintance')) {
@@ -104,9 +120,10 @@ class Maintance_model extends CI_model
 					if (!empty($data)) {
 						if ($this->db->insert('maintance', [
 							'pelanggan_id' => $pelanggan_id,
-							'user_id' 	=> $user_id,
+							'user_id' 	=> $get_user_id,
 							'keluhan' 	=> $data['keluhan'],
 							'solusi'	=> '-',
+							'alasan'	=> '-',
 							'status'	=> 1
 						])) {
 							$msg = ['status' => 'success', 'msg' => 'maintance berhasil ditambahkan kedalam list maintance'];

@@ -301,7 +301,7 @@
   <!-- /.card-footer -->
 </div>
       <!-- /.card -->
-      <div class="card card-solid collapsed-card">
+<div class="card card-solid collapsed-card">
   <div class="card-header pb-0">
     <div class="text-center">
       <b>DATA PELANGGAN NON PROMO (<?php echo $data['canb']; ?>)</b>
@@ -401,7 +401,6 @@
   </div>
   <!-- /.card-footer -->
 </div>
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 
 <div class="col-md-12">
  <!-- Main content -->
@@ -409,8 +408,10 @@
 
   <!-- Default box -->
   <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Daftar maintance</h3>
+    <div class="card-header pb-0">
+      <div class="text-center">
+        <b>MAINTANCE MASUK</b>
+      </div>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -418,7 +419,7 @@
         </button>
       </div>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0" style="display: none">
       <div class="table-responsive">
         <table class="table table-striped projects">
           <thead>
@@ -458,21 +459,21 @@
                 </td>
                 <td class="project-state">
                   <?php
-                    $status = '';
-                    $text = '';
-                    if ($value['status'] == 1) {
-                      $status = 'danger';
-                      $text = 'belum';
-                    }elseif($value['status'] == 2){
-                      $status = 'warning';
-                      $text = 'proses perbaikan';
-                    }elseif($value['status'] == 3){
-                      $status = 'info';
-                      $text = 'perbaikan belum selesai';
-                    }elseif($value['status'] == 4){
-                      $status = 'success';
-                      $text = 'perbaikan selesai';
-                    }
+                  $status = '';
+                  $text = '';
+                  if ($value['status'] == 1) {
+                    $status = 'danger';
+                    $text = 'belum';
+                  }elseif($value['status'] == 2){
+                    $status = 'warning';
+                    $text = 'proses perbaikan';
+                  }elseif($value['status'] == 3){
+                    $status = 'info';
+                    $text = 'perbaikan belum selesai';
+                  }elseif($value['status'] == 4){
+                    $status = 'success';
+                    $text = 'perbaikan selesai';
+                  }
                   ?>
                   <span class="badge badge-<?php echo $status; ?>"><?php echo $text; ?></span>
                 </td>
@@ -487,5 +488,91 @@
   <!-- /.card -->
 
 </section>
-<!-- /.content -->
+</div>
+<div class="col-md-12">
+ <!-- Main content -->
+ <section class="content">
+
+  <!-- Default box -->
+  <div class="card">
+    <div class="card-header pb-0">
+      <div class="text-center">
+        <b>MAINTANCE DALAM PROSES</b>
+      </div>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-0" style="display: none">
+      <div class="table-responsive">
+        <table class="table table-striped projects">
+          <thead>
+            <tr>
+              <th>
+                No.
+              </th>
+              <th>
+                Nama pelanggan
+              </th>
+              <th>
+                Keluhan
+              </th>
+              <th class="text-center">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php $i=0; ?>
+            <?php foreach ($data['maintance'] as $key => $value): ?>
+              <tr>
+                <td>
+                  <?php echo ++$i; ?> 
+                </td>
+                <td>
+                  <a>
+                    <?php echo $value['nama'] ?>
+                  </a>
+                  <br/>
+                  <small>
+                    <?php echo echo_date($value['komplain_c']); ?> | <?php echo echo_time($value['komplain_c']); ?>
+                  </small>
+                </td>
+                <td>
+                  <?php echo $value['keluhan'] ?>
+                </td>
+                <td class="project-state">
+                  <?php
+                  $status = '';
+                  $text = '';
+                  if ($value['status'] == 1) {
+                    $status = 'danger';
+                    $text = 'belum';
+                  }elseif($value['status'] == 2){
+                    $status = 'warning';
+                    $text = 'proses perbaikan';
+                  }elseif($value['status'] == 3){
+                    $status = 'info';
+                    $text = 'perbaikan belum selesai';
+                  }elseif($value['status'] == 4){
+                    $status = 'success';
+                    $text = 'perbaikan selesai';
+                  }
+                  ?>
+                  <span class="badge badge-<?php echo $status; ?>"><?php echo $text; ?></span>
+                </td>
+              </tr>
+            <?php endforeach ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+
+</section>
 </div>
