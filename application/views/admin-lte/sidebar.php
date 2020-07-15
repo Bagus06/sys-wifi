@@ -24,6 +24,22 @@ if ($link1 == 'laporan') {
 	}
 }
 
+if ($link1 == 'agenda') {
+	$mo6 = 'menu-open';
+	$ma6 = 'active';
+	if ($link2 == 'list') {
+		$agnd = 'active';
+	}
+}
+
+if ($link1 == 'laporan_keuangan') {
+	$mo7 = 'menu-open';
+	$ma7 = 'active';
+	if ($link2 == 'list') {
+		$lk = 'active';
+	}
+}
+
 if ($link1 == 'user') {
 	$mo1 = 'menu-open';
 	$ma1 = 'active';
@@ -101,14 +117,6 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		<i class="nav-icon fas fa-tachometer-alt"></i>
 		<p>
 			DASHBOARD
-		</p>
-	</a>
-</li>
-<li class="nav-item">
-	<a href="<?php echo base_url('laporan/list'); ?>" class="nav-link <?php echo @$l; ?>">
-		<i class="nav-icon fas fa-atlas"></i>
-		<p>
-			LAPORAN
 		</p>
 	</a>
 </li>
@@ -288,4 +296,28 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		</ul>
 	</li>
 <?php endif ?>
+<li class="nav-item">
+	<a href="<?php echo base_url('laporan/list'); ?>" class="nav-link <?php echo @$l; ?>">
+		<i class="nav-icon fas fa-atlas"></i>
+		<p>
+			LAPORAN
+		</p>
+	</a>
+</li>
+<li class="nav-item">
+	<a href="<?php echo base_url('agenda/list'); ?>" class="nav-link <?php echo @$agnd; ?>">
+		<i class="nav-icon fas fa-clipboard-list"></i>
+		<p>
+			AGENDA
+		</p>
+	</a>
+</li>
+<li class="nav-item">
+	<a href="<?php echo base_url('laporan_keuangan/list'); ?>" class="nav-link <?php echo @$lk; ?>">
+		<i class="nav-icon fas fa-funnel-dollar"></i>
+		<p>
+			LAPORAN KEUANGAN
+		</p>
+	</a>
+</li>
 <?php endif; ?>
