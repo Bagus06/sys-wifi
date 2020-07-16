@@ -30,7 +30,13 @@
 				<?php endif ?>
 				<div class="col-12 col-sm-6 col-md-4 align-items-stretch">
 					<div class="card bg-<?php echo $bg_card; ?>">
-						<div class="card-body pt-0">
+						<?php 
+							$size = '250px';
+							if ($value['active'] == 2 || $value['active'] == 3) {
+								$size = '300px';
+							}
+						 ?>
+						<div class="card-body pt-10" style="height: $size">
 							<div class="row">
 								<div class="col-12">
 									<?php 
@@ -48,12 +54,17 @@
 									 ?>
 									<h2 class="lead"><b><i class="fas fa-lg fa-network-wired" style="color:<?php echo $color; ?>"></i> <?php echo $value['nama'] ?></b></h2>
 									<ul class="ml-4 mb-0 fa-ul text-muted">
-										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-map-marked-alt"></i></span> Alamat : <?php echo $value['alamat']; ?>-Ds.<?php echo $value['desa']; ?>-Kec.<?php echo $value['kec']; ?>-Kab.<?php echo $value['kab']; ?></li>
-										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-map-pin"></i></span> kordinat : <?php echo $value['kordinat'] ?></li>
-										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telephone : <?php echo $value['no_tlp'] ?> </li>
-										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-lg fa-bookmark"></i></span> no pelanggan : <?php echo $value['no_pelanggan'] ?></li>
-										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-lg fa-clock"></i></span> Tgl Pendaftaran : <?php echo echo_date($value['pendaftaran']); ?></li>
-										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-user"></i></span> Penginput : <?php if (!empty(get_name($value['user_id']))): ?><?php echo get_name($value['user_id']); ?><?php endif ?></li>
+										<li class="small"><span class="fa-li"><i class="fas fa-sm fa-map-marked-alt"></i></span> Alamat : <?php echo $value['alamat']; ?>/<?php echo $value['desa']; ?>/<?php echo $value['kec']; ?>/<?php echo $value['kab']; ?></li>
+										<li class="small"><span class="fa-li"><i class="fas fa-sm fa-map-pin"></i></span> kordinat : <?php echo $value['kordinat'] ?></li>
+										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-phone"></i></span> Telephone : <?php echo $value['no_tlp'] ?> </li>
+										<?php if ($value['active'] == 3): ?>
+											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-bookmark"></i></span> no pelanggan : <?php echo $value['no_pelanggan'] ?></li>
+										<?php endif ?>
+										<?php if ($value['alat_biaya'] != 0): ?>
+											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-dollar-sign"></i></span> Dana Tambahan : <?php echo money($value['alat_biaya']); ?></li>
+										<?php endif ?>
+										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-clock"></i></span> Tgl Pendaftaran : <?php echo echo_date($value['pendaftaran']); ?></li>
+										<li class="small"><span class="fa-li"><i class="fas fa-sm fa-user"></i></span> Penginput : <?php if (!empty(get_name($value['user_id']))): ?><?php echo get_name($value['user_id']); ?><?php endif ?></li>
 									</ul>
 								</div>
 							</div>

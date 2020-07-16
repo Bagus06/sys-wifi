@@ -199,6 +199,11 @@
         </table>
       </div>
     </div>
+    <div class="card-footer">
+      <nav aria-label="Contacts Page Navigation">
+        <?php echo $this->pagination->create_links(); ?>
+      </nav>
+    </div>
     <!-- /.card-body -->
   </div>
   <!-- /.card -->

@@ -29,8 +29,8 @@
 					<input type="hidden" name="kab" value="">
 					<input type="hidden" name="kec" value="">
 					<input type="hidden" name="desa" value="">
-					<label for="nama">nama</label>
-					<input type="text" class="form-control" name="nama" placeholder="nama" value="<?php echo @$data['data']['nama'] ?>" required>
+					<label for="nama">Nama <small style="color: red">*Masukan nama lengkap sesuai ktp</small></label>
+					<input type="text" class="form-control" name="nama" placeholder="nama" value="<?php echo @$data['data']['nama'] ?>" onkeyup="this.value = this.value.toUpperCase()" required>
 				</div>
 				<div class="form-group">
 					<label for="">Provinsi</label>
@@ -48,20 +48,9 @@
 					<label for="">Desa</label>
 					<select name="desa_id" id="desa_id" class="form-control select2"></select>
 				</div>
-				<!-- <div class="row">
-					<div class="col-3">
-						<input name="kab" type="text" class="form-control" placeholder="Kabupaten/Kota" value="<?php echo @$data['data']['kab'] ?>" required>
-					</div>
-					<div class="col-4">
-						<input name="kec" type="text" class="form-control" placeholder="Kecamatan" value="<?php echo @$data['data']['kec'] ?>" required>
-					</div>
-					<div class="col-5">
-						<input name="alamat" type="text" class="form-control" placeholder="Alamat" value="<?php echo @$data['data']['alamat'] ?>" required>
-					</div>
-				</div> -->
 				<div class="form-group">
 					<label for="">Alamat</label>
-					<textarea placeholder="Alamat seperti nomor, nama jalan, atau RT RW" name="alamat" id="" cols="20" rows="5" class="form-control"></textarea>
+					<textarea placeholder="Alamat seperti nomor, nama jalan, atau RT RW" name="alamat" id="" cols="20" rows="5" class="form-control" onkeyup="this.value = this.value.toUpperCase()" required></textarea>
 				</div>
 				<div class="form-group">
 					<label for="no_tlp">no tlp/wa</label>
@@ -72,7 +61,7 @@
 					<input type="number" class="form-control" name="alat_biaya" placeholder="alat_biaya" value="<?php echo @$data['data']['alat_biaya'] ?>" required>
 				</div>
 				<div class="form-group">
-					<label for="kordinat">kordinat lokasi</label>
+					<label for="kordinat">kordinat lokasi <small style="color: red">*format input (latitude,longitude) masukkan sesuai format</small></label>
 					<input type="text" class="form-control" name="kordinat" placeholder="kordinat" value="<?php echo @$data['data']['kordinat'] ?>">
 				</div>
 			</div>

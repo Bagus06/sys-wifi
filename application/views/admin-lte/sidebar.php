@@ -28,7 +28,17 @@ if ($link1 == 'agenda') {
 	$mo6 = 'menu-open';
 	$ma6 = 'active';
 	if ($link2 == 'list') {
-		$agnd = 'active';
+		if ($fa == 1) {
+			$agnd = 'active';
+		}elseif ($fa == 2) {
+			$agnddp = 'active';
+		}elseif ($fa == 3) {
+			$agndss = 'active';
+		}else{
+			$agnd = 'active';
+		}
+	}elseif ($link2 == 'edit') {
+		$tagnd = 'active';
 	}
 }
 
@@ -304,13 +314,46 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		</p>
 	</a>
 </li>
-<li class="nav-item">
-	<a href="<?php echo base_url('agenda/list'); ?>" class="nav-link <?php echo @$agnd; ?>">
+<li class="nav-item has-treeview <?php echo @$mo6; ?>">
+	<a href="#" class="nav-link <?php echo @$ma6; ?>">
 		<i class="nav-icon fas fa-clipboard-list"></i>
 		<p>
-			AGENDA
+			AGENDA NON TEKNIS
+			<i class="fas fa-angle-left right"></i>
 		</p>
 	</a>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('agenda/edit'); ?>" class="nav-link <?php echo @$tagnd; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Tambah Agenda</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('agenda/list'); ?>" class="nav-link <?php echo @$agnd; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Agenda</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('agenda/list/?fa=2'); ?>" class="nav-link <?php echo @$agnddp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Agenda Proses Dikerjakan</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('agenda/list/?fa=3'); ?>" class="nav-link <?php echo @$agndss; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Agenda Selesai Dikerjakan</p>
+			</a>
+		</li>
+	</ul>
 </li>
 <li class="nav-item">
 	<a href="<?php echo base_url('laporan_keuangan/list'); ?>" class="nav-link <?php echo @$lk; ?>">
