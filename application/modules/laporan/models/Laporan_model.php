@@ -7,17 +7,49 @@ class Laporan_model extends CI_model
 		$msg = [];
 		$date = date('Y-m-d');
 
-		$this->db->like('created', $date);
+		$filter = $this->input->get();
+		$filter_by_date = $this->input->get('date');
+		$filter_by_name = $this->input->get('karyawan');
+
+		if (!empty($filter)) {
+			if (!empty($filter_by_date)) {
+				$this->db->like('created', $filter_by_date);
+			}else{
+				$this->db->like('created', $date);
+			}
+			if (!empty($filter_by_name)) {
+				$this->db->like('user_id', $filter_by_name);
+			}
+		}else{
+			$this->db->like('created', $date);
+		}
 		$msg['data'] = $this->db->get('laporan')->result_array();
 		return $msg;
 	}
 
 	public function count_laporan()
 	{
+		$msg = [];
 		$date = date('Y-m-d');
 
-		$this->db->like('created', $date);
-		return $this->db->get('laporan')->num_rows();
+		$filter = $this->input->get();
+		$filter_by_date = @$filter['date'];
+		$filter_by_name = @$filter['karyawan'];
+
+		if (!empty($filter)) {
+			if (!empty($filter_by_date)) {
+				$this->db->like('created', $filter_by_date);
+			}else{
+				$this->db->like('created', $date);
+			}
+			if (!empty($filter_by_name)) {
+				$this->db->like('user_id', $filter_by_name);
+			}
+		}else{
+			$this->db->like('created', $date);
+		}
+		$msg = $this->db->get('laporan')->num_rows();
+		return $msg;
 	}
 
 	public function save($id=0)

@@ -352,6 +352,12 @@ class User_model extends CI_model
 		}
 	}
 
+	public function for_our()
+	{
+		$this->db->select('user_id, nama');
+		return $this->db->get('user_profile')->result_array();
+	}
+
 	public function count_user()
 	{
 		if (!empty($this->input->get('filter'))) {

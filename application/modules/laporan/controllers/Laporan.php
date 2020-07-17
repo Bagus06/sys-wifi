@@ -7,6 +7,7 @@ class Laporan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('laporan_model');
+		$this->load->model('user_model');
 	}
 
 	public function list()
@@ -19,9 +20,11 @@ class Laporan extends CI_Controller
 		$config['total_rows'] = $this->laporan_model->count_laporan();
 		$config['per_page'] = 12;
 
-		if ($this->input->get('fm')) {
+		if ($this->input->get()) {
+			$filter_by_date = $this->input->get('date');
+			$filter_by_name = $this->input->get('karyawan');
 			$config['reuse_query_string'] = TRUE;
-			$config['suffix'] = '?fm=' . $this->input->get('fm');
+			$config['suffix'] = '?date=' . $filter_by_date . '&karyawan=' . $filter_by_name;
 			$config['use_global_url_suffix'] = TRUE;
 		}
 
@@ -67,6 +70,7 @@ class Laporan extends CI_Controller
 		// print_r($data);die;
 		// echo "</pre>";
 		$data['url'] = $url;
+		$data['user'] = $this->user_model->for_our();
 		$this->load->view('index', ['data'=>$data]);
 	}
 
