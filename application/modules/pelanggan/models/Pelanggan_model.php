@@ -83,6 +83,10 @@ class Pelanggan_model extends CI_model
 						$image_name_r = $current_user['foto_rumah'];
 					}
 
+					if (empty($data['kordinat'])) {
+						$data['kordinat'] = $data['koordinat'];
+					}
+
 					$this->db->where('id', $id);
 					if ($this->db->update('pelanggan', [
 						'user_id' => get_user()['id'],
@@ -240,6 +244,11 @@ class Pelanggan_model extends CI_model
 						'trx' => $data['trx'],
 						'ccq' => $data['ccq'],
 					]);
+
+					if (empty($data['kordinat'])) {
+						$data['kordinat'] = $data['koordinat'];
+					}
+
 					$this->db->where('pelanggan_id', $id);
 					if ($this->db->update('pemasangan')){
 						$this->db->set([

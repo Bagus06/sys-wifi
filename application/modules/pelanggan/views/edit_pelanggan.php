@@ -37,16 +37,25 @@
 					<label for="kk">No KK</label>
 					<input type="number" class="form-control" name="kk" placeholder="kk" value="<?php echo @$data['data']['kk'] ?>" required>
 				</div>
-				<div class="row">
-					<div class="col-3">
-						<input name="kab" type="text" class="form-control" placeholder="Kabupaten/Kota" value="<?php echo @$data['data']['kab'] ?>" required>
-					</div>
-					<div class="col-4">
-						<input name="kec" type="text" class="form-control" placeholder="Kecamatan" value="<?php echo @$data['data']['kec'] ?>" required>
-					</div>
-					<div class="col-5">
-						<input name="alamat" type="text" class="form-control" placeholder="Alamat" value="<?php echo @$data['data']['alamat'] ?>" required>
-					</div>
+				<div class="form-group">
+					<label for="">Provinsi</label>
+					<select name="prov_id" id="prov_id" class="form-control select2"></select>
+				</div>
+				<div class="form-group">
+					<label for="">Kabupaten</label>
+					<select name="kab_id" id="kab_id" class="form-control select2"></select>
+				</div>
+				<div class="form-group">
+					<label for="">Kecamatan</label>
+					<select name="kec_id" id="kec_id" class="form-control select2"></select>
+				</div>
+				<div class="form-group">
+					<label for="">Desa</label>
+					<select name="desa_id" id="desa_id" class="form-control select2"></select>
+				</div>
+				<div class="form-group">
+					<label for="">Alamat</label>
+					<textarea placeholder="Alamat seperti nomor, nama jalan, atau RT RW" name="alamat" id="" cols="20" rows="5" class="form-control" onkeyup="this.value = this.value.toUpperCase()" required></textarea>
 				</div>
 				<div class="form-group">
 					<label for="no_tlp">no tlp/wa</label>
@@ -61,16 +70,12 @@
 					<input type="text" class="form-control" name="no_pelanggan" placeholder="no_pelanggan" value="<?php echo @$data['data']['no_pelanggan'] ?>" required>
 				</div>
 				<div class="form-group">
-					<label for="kordinat">Kordinat</label>
-					<input type="text" class="form-control" name="kordinat" placeholder="kordinat" value="<?php echo @$data['data']['kordinat'] ?>" required>
-				</div>
-				<div class="form-group">
 					<label for="alat_biaya">Biaya promo <small style="color: red">*isi dengan 0 jika tidak ada penambahan biaya alat dari pelanggan</small></label>
 					<input type="number" class="form-control" name="alat_biaya" placeholder="alat_biaya" value="<?php echo @$data['data']['alat_biaya'] ?>" required>
 				</div>
 				<div class="form-group">
 					<label for="kordinat">kordinat lokasi</label>
-					<input type="text" class="form-control" name="kordinat" placeholder="kordinat" value="<?php echo @$data['data']['kordinat'] ?>">
+					<input type="text" class="form-control" name="kordinat" placeholder="kordinat" value="<?php echo @$data['data']['kordinat'] ?>" required>
 				</div>
 				<?php if (!empty($data['data']['foto_pelanggan']) && $data['data']['foto_pelanggan'] != '-'): ?>
 					<a href="<?php echo base_url('assets/images/pelanggan/' . $data['data']['foto_pelanggan']) ?>" data-toggle="lightbox" data-title="<?php echo $data['data']['foto_pelanggan']; ?>" data-gallery="gallery" target="_blank">
