@@ -56,12 +56,12 @@
 									<ul class="ml-4 mb-0 fa-ul text-muted">
 										<li class="small"><span class="fa-li"><i class="fas fa-sm fa-map-marked-alt"></i></span> Alamat : <?php echo $value['alamat']; ?>/<?php echo $value['desa']; ?>/<?php echo $value['kec']; ?>/<?php echo $value['kab']; ?></li>
 										<li class="small"><span class="fa-li"><i class="fas fa-sm fa-map-pin"></i></span> kordinat : <?php echo $value['kordinat'] ?></li>
-										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-phone"></i></span> Telephone : <?php echo $value['no_tlp'] ?> </li>
+										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-phone"></i></span> Telephone : <a href="https://api.whatsapp.com/send?phone=<?php echo $value['no_tlp'] ?>" target="_blank"><?php echo $value['no_tlp'] ?></a></li>
 										<?php if ($value['active'] == 3): ?>
-											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-bookmark"></i></span> no pelanggan : <?php echo $value['no_pelanggan'] ?></li>
+											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-bookmark"></i></span> No PKS : <?php echo $value['no_pelanggan'] ?></li>
 										<?php endif ?>
 										<?php if ($value['alat_biaya'] != 0): ?>
-											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-dollar-sign"></i></span> Dana Tambahan : <?php echo money($value['alat_biaya']); ?></li>
+											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-dollar-sign"></i></span> Biaya Promo : <?php echo money($value['alat_biaya']); ?></li>
 										<?php endif ?>
 										<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-clock"></i></span> Tgl Pendaftaran : <?php echo echo_date($value['pendaftaran']); ?></li>
 										<li class="small"><span class="fa-li"><i class="fas fa-sm fa-user"></i></span> Penginput : <?php if (!empty(get_name($value['user_id']))): ?><?php echo get_name($value['user_id']); ?><?php endif ?></li>

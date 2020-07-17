@@ -30,8 +30,8 @@
 					<input type="text" class="form-control" name="kordinat" placeholder="kordinat" value="<?php echo @$data['data']['kordinat'] ?>" required>
 				</div>
 				<div class="form-group">
-					<label for="kk">No KK</label>
-					<input type="number" class="form-control" name="kk" placeholder="kk" value="<?php echo @$data['data']['kk'] ?>" required>
+					<label for="kk">No KK <small style="color:red"><i>*Sementara Kk di input oleh system</i></small></label>
+					<input type="text" class="form-control" name="kk" placeholder="kk" value="<?php echo random_string('alnum', 16); ?>" required>
 				</div>
 				<div class="form-group">
 					<label for="pekerjaan">pekerjaan</label>
