@@ -21,6 +21,8 @@ if ($link1 == 'laporan') {
 	$ma5 = 'active';
 	if ($link2 == 'list') {
 		$l = 'active';
+	}elseif ($link2 == 'edit') {
+		$le = 'active';
 	}
 }
 
@@ -306,13 +308,30 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		</ul>
 	</li>
 <?php endif ?>
-<li class="nav-item">
-	<a href="<?php echo base_url('laporan/list'); ?>" class="nav-link <?php echo @$l; ?>">
+<li class="nav-item has-treeview <?php echo @$mo5; ?>">
+	<a href="#" class="nav-link <?php echo @$ma5; ?>">
 		<i class="nav-icon fas fa-atlas"></i>
 		<p>
 			LAPORAN
+			<i class="fas fa-angle-left right"></i>
 		</p>
 	</a>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan/edit'); ?>" class="nav-link <?php echo @$le; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Tambah Laporan</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan/list'); ?>" class="nav-link <?php echo @$l; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Laporan</p>
+			</a>
+		</li>
+	</ul>
 </li>
 <li class="nav-item has-treeview <?php echo @$mo6; ?>">
 	<a href="#" class="nav-link <?php echo @$ma6; ?>">

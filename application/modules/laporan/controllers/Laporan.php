@@ -69,4 +69,10 @@ class Laporan extends CI_Controller
 		$data['url'] = $url;
 		$this->load->view('index', ['data'=>$data]);
 	}
+
+	public function edit($id=0)
+	{
+		$data = $this->laporan_model->save($id);
+		$this->load->view('index', ['data'=>$data]);
+	}
 }

@@ -38,43 +38,18 @@ class Agenda_model extends CI_model
 			if (!empty($id)) {
 				$current_agenda = $this->db->get_where('agenda', ['id'=>$id])->row_array();
 				if (!empty($current_agenda)) {
-					if (!empty($this->input->get('status'))) {
-						$status = $this->input->get('status');
-						$pesan = '';
-						if ($status == 2) {
-							$data = [
-								'status' => $this->input->get('status'),
-							];
-							$pesan = 'status agenda berhasil dirubah menjadi dalam proses eksekusi.';
-						}elseif ($status == 3) {
-							$data = [
-								'exsekusi' => $user_id,
-								'status' => $this->input->get('status'),
-							];
-							$pesan = 'status agenda berhasil dirubah menjadi dalam telah di eksekusi.';
-						}
+					$data = [
+						'pembuat' => $user_id,
+						'exsekusi' => 0,
+						'ket' => $data['ket'],
+					];
 
-						$this->db->set($data);
-						$this->db->where('id', $id);
-						if ($this->db->update('agenda')) {
-							$msg = ['status' => 'success', 'msg' => $pesan];
-						}else{
-							$msg['msgs'][] = 'ubah status agenda gagal.';
-						}
+					$this->db->set($data);
+					$this->db->where('id', $id);
+					if ($this->db->update('agenda')) {
+						$msg = ['status' => 'success', 'msg' => 'agenda berhasil diubah'];
 					}else{
-						$data = [
-							'pembuat' => $user_id,
-							'exsekusi' => 0,
-							'ket' => $data['ket'],
-						];
-
-						$this->db->set($data);
-						$this->db->where('id', $id);
-						if ($this->db->update('agenda')) {
-							$msg = ['status' => 'success', 'msg' => 'agenda berhasil diubah'];
-						}else{
-							$msg['msgs'][] = 'agenda gagal diubah.';
-						}
+						$msg['msgs'][] = 'agenda gagal diubah.';
 					}
 				}else{
 					$msg['msgs'][] = 'Agenda yang anda edit tidak ditemukan di server.';
