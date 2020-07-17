@@ -74,4 +74,5 @@
 </div>
 <script>
 	var _URL = "<?php echo base_url();?>";
+	var _ID = 0;
 </script>

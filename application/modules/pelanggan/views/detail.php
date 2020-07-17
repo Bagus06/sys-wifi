@@ -42,8 +42,8 @@
 							<div class="card-header">
 								<h3 class="card-title">Detail pelanggan</h3>
 								<h3 class="card-title" style="padding-left: 2%">
-									<!-- <a href="<?php echo base_url('pelanggan/edit_pelanggan/' . $data['pelanggan_id']) ?>" class="btn btn-sm btn-info">Edit Profile Pelanggan</a> -->
-									<a href="" class="btn btn-sm btn-info">Edit Profile Pelanggan</a>
+									<a href="<?php echo base_url('pelanggan/edit_pelanggan/' . $data['pelanggan_id']) ?>" class="btn btn-sm btn-info">Edit Profile Pelanggan</a>
+									<!-- <a href="" class="btn btn-sm btn-info">Edit Profile Pelanggan</a> -->
 								</h3>
 							</div>
 							<!-- /.card-header -->

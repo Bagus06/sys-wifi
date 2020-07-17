@@ -109,3 +109,7 @@
 		</div>
 	</form>
 </div>
+<script>
+	var _URL = "<?php echo base_url();?>";
+	var _ID = "<?php echo $id;?>";
+</script>

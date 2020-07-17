@@ -14,6 +14,12 @@ class Pelanggan extends CI_Controller
 
 	}
 
+	public function detail_json($id=0)
+	{
+		$data = $this->pelanggan_model->detail($id);
+		echo json_encode($data);
+	}
+
 	public function detail($id=0)
 	{
 		$data = $this->pelanggan_model->detail($id);
@@ -33,7 +39,7 @@ class Pelanggan extends CI_Controller
 		// print_r($data);
 		// echo "</pre>";
 		// die;
-		$this->load->view('index',['data'=>$data]);
+		$this->load->view('index',['data'=>$data,'id'=>$id]);
 	}
 
 	public function edit_selesai($id = 0)

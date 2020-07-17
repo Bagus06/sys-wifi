@@ -63,7 +63,7 @@
 	})
 </script>
 <?php
-if($this->uri->uri_string == 'pelanggan/edit')
+if($this->uri->uri_string == 'pelanggan/edit' || ($this->uri->segments[1] == 'pelanggan' && $this->uri->segments[2] == 'edit_pelanggan'))
 {
 	?>
 	<script src="<?php echo base_url('assets/js/pelanggan.js');?>"></script>
