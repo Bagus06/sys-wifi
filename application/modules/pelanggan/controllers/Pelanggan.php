@@ -120,17 +120,21 @@ class Pelanggan extends CI_Controller
 	public function get_provinces()
 	{
 		echo file_get_contents('https://sipapat.patikab.go.id/admin/provinces/all');
+		// echo file_get_contents('http://localhost/sipapat/admin/provinces/all');
 	}
 	public function get_regencies()
 	{
 		echo file_get_contents('https://sipapat.patikab.go.id/admin/regencies/all');
+		// echo file_get_contents('http://localhost/sipapat/admin/regencies/all');
 	}
 	public function get_districts()
 	{
 		echo file_get_contents('https://sipapat.patikab.go.id/admin/districts/all');
+		// echo file_get_contents('http://localhost/sipapat/admin/districts/all');
 	}
 	public function get_villages($district_id = 0)
 	{
 		echo file_get_contents('https://sipapat.patikab.go.id/admin/villages/by_district_id/'.$district_id);
+		// echo file_get_contents('http://localhost/sipapat/villages/by_district_id/'.$district_id);
 	}
 }
