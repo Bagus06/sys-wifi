@@ -63,28 +63,11 @@
 	})
 </script>
 <?php
-if($this->uri->uri_string == 'pelanggan/edit' || ($this->uri->segments[1] == 'pelanggan' && $this->uri->segments[2] == 'edit_pelanggan'))
+if($this->uri->uri_string == 'pelanggan/edit' || ($this->uri->segments[1] == 'pelanggan' && $this->uri->segments[2] == 'edit_pelanggan') || ($this->uri->segments[1] == 'pelanggan' && $this->uri->segments[2] == 'edit_selesai'))
 {
 	?>
 	<script src="<?php echo base_url('assets/js/pelanggan.js');?>"></script>
+	<script src="<?php echo base_url('assets/js/location.js');?>"></script>
 	<?php
 }
 ?>
-<?php if ($this->uri->rsegments[2] == 'folder'): ?>
-	<script>
-		$(function () {
-			$(document).on('click', '[data-toggle="lightbox"]', function(event) {
-				event.preventDefault();
-				$(this).ekkoLightbox({
-					alwaysShowClose: true
-				});
-			});
-
-			$('.filter-container').filterizr({gutterPixels: 3});
-			$('.btn[data-filter]').on('click', function() {
-				$('.btn[data-filter]').removeClass('active');
-				$(this).addClass('active');
-			});
-		})
-	</script>
-<?php endif ?>

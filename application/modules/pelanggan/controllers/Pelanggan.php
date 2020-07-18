@@ -141,6 +141,6 @@ class Pelanggan extends CI_Controller
 	public function get_villages($district_id = 0)
 	{
 		echo file_get_contents('https://sipapat.patikab.go.id/admin/villages/by_district_id/'.$district_id);
-		// echo file_get_contents('http://localhost/sipapat/villages/by_district_id/'.$district_id);
+		// echo file_get_contents('http://localhost/sipapat/admin/villages/by_district_id/'.$district_id);
 	}
 }

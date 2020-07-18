@@ -15,11 +15,15 @@ function select_desa(link,data){
     var kec_id = data['kec_id'];
     $.getJSON(link+kec_id,function(result){
         var kec_id = data['kec_id'];
+        var name = data['kec'];
+        $('input[name="kec"]').val(name);
         if(result[kec_id] === undefined){
             var tmp = [{'text':'None','value':'0','selected':'true'}];
         }else{
             var option = result[kec_id];
             var tmp = [{'text':'None','value':'0','selected':'true'}];
+            var name = data['desa'];
+            $('input[name="desa"]').val(name);
             for(var i =0; i< option.length;i++){
                 tmp[i+1] = [];
                 if(option[i].id==data.desa_id){
@@ -64,6 +68,8 @@ $(document).ready(function(){
         }else{
             var option = result[prov_id];
             var tmp = [{'text':'None','value':'0','selected':'true'}];
+            var name = data['prov'];
+            $('input[name="prov"]').val(name);
             for(var i =0; i< option.length;i++){
                 tmp[i+1] = [];
                 if(option[i].id==data.kab_id){
@@ -104,6 +110,8 @@ $(document).ready(function(){
         }else{
             var option = result[kab_id];
             var tmp = [{'text':'None','value':'0','selected':'true'}];
+            var name = data['kab'];
+            $('input[name="kab"]').val(name);
             for(var i =0; i< option.length;i++){
                 tmp[i+1] = [];
                 if(option[i].id==data.kec_id){
@@ -170,19 +178,4 @@ $(document).ready(function(){
             $('input[name="desa"]').val(name);
         });
     });
-
-    function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-          alert("browser anda tidak mendukung untuk menangkap lokasi anda");
-        }
-      }
-  
-      function showPosition(position) {
-          $("#form_pelanggan").find(".panel-body").append("<label>LOKASI</label><br>Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude+"<input type='hidden' name='koordinat' value='long:"+position.coords.longitude+",lat:"+position.coords.latitude+"'>");
-      }
-
-      getLocation();
 });

@@ -10,7 +10,7 @@
 		<?php endif ?>
 	<?php endif ?>
 	<a href="<?php echo base_url('pelanggan/detail/' . @$data['data']['id']) ?>" class="btn btn-sm btn-warning"><i class="fas fa-angle-left"></i> Kembali</a>
-	<form action="" method="post" enctype="multipart/form-data">
+	<form action="" method="post" id="form_pelanggan" enctype="multipart/form-data">
 		<div class="panel panel-default card card-default">
 			<div class="panel-heading card-header">
 				<?php if (empty($data['data'])): ?>
@@ -26,6 +26,10 @@
 			</div>
 			<div class="panel-body card-body">
 				<div class="form-group">
+					<input type="hidden" name="prov" value="">
+					<input type="hidden" name="kab" value="">
+					<input type="hidden" name="kec" value="">
+					<input type="hidden" name="desa" value="">
 					<label for="nama">nama</label>
 					<input type="text" class="form-control" name="nama" placeholder="nama" value="<?php echo @$data['data']['nama'] ?>" required>
 				</div>
@@ -55,7 +59,7 @@
 				</div>
 				<div class="form-group">
 					<label for="">Alamat</label>
-					<textarea placeholder="Alamat seperti nomor, nama jalan, atau RT RW" name="alamat" id="" cols="20" rows="5" class="form-control" onkeyup="this.value = this.value.toUpperCase()" required></textarea>
+					<textarea placeholder="Alamat seperti nomor, nama jalan, atau RT RW" name="alamat" id="" cols="20" rows="5" class="form-control" onkeyup="this.value = this.value.toUpperCase()" value="<?php echo $data['data']['alamat'] ?>" required><?php echo $data['data']['alamat'] ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="no_tlp">no tlp/wa</label>
@@ -99,6 +103,14 @@
 					<label for="foto_rumah">foto rumah (max file size 3Mb)</label>
 					<div class="custom-file">
 						<input type="file" name="foto_rumah" class="form-control custom-file-label" id="foto_rumah">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<input name="trx" type="number" value="<?php echo $data['data']['trx'] ?>" class="form-control" placeholder="TRX" min="1" max="100" required>
+					</div>
+					<div class="col-6">
+						<input name="ccq" value="<?php echo $data['data']['ccq'] ?>" type="number" class="form-control" placeholder="CCQ" min="1" max="100" required>
 					</div>
 				</div>
 			</div>

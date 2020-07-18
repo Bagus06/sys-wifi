@@ -117,6 +117,42 @@
 												</a>
 											</td>
 										</tr>
+										<tr>
+											<td colspan="4">
+												<?php 
+													$trx = '';
+													$ccq = '';
+													if ($data['trx'] >= 70) {
+														$trx = 'danger';
+													}elseif ($data['trx'] >= 50) {
+														$trx = 'warning';
+													}elseif ($data['trx'] < 50) {
+														$trx = 'success';
+													}
+
+													if ($data['ccq'] <= 40) {
+														$ccq = 'danger';
+													}elseif ($data['ccq'] <= 70) {
+														$ccq = 'warning';
+													}elseif ($data['ccq'] > 70) {
+														$ccq = 'success';
+													}
+
+												 ?>
+												<p style="margin: 5px">TRX : (<?php echo $data['trx'] ?>%)</p>
+												<div class="progress mb-1" style="margin: 5px">
+													<div class="progress-bar <?php echo 'bg-' . $trx; ?>" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $data['trx'] . '%' ?>">
+														<span class="sr-only">20% Complete</span>
+													</div>
+												</div>
+												<p style="margin: 5px">CCQ : (<?php echo $data['ccq'] ?>%)</p>
+												<div class="progress mb-1" style="margin: 5px">
+													<div class="progress-bar <?php echo 'bg-' . $ccq; ?>" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $data['ccq'] . '%' ?>">
+														<span class="sr-only">20% Complete</span>
+													</div>
+												</div>
+											</td>
+										</tr>
 									</table>
 									<table class="col-md-12" border="1" style="margin: 0px; margin-top: 10px">
 										<tr>

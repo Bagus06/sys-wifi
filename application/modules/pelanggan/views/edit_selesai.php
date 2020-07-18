@@ -5,21 +5,21 @@
 		<?php echo alert($data['status'],$data['msg']) ?>
 		<?php if (!empty($data['msgs'])): ?>
 			<?php foreach ($data['msgs'] as $key => $value): ?>
-					<?php echo alert($data['status'], $value) ?>
-				<?php endforeach ?>	
+				<?php echo alert($data['status'], $value) ?>
+			<?php endforeach ?>	
 		<?php endif ?>
 	<?php endif ?>
-	<a href="<?php echo $_SERVER['HTTP_REFERER'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-angle-left"></i>kembali</a>
-	<form action="" method="post" enctype="multipart/form-data">
-		<div class="panel panel-default card card-default">
-			<div class="panel-heading card-header">
-				Data Pelanggan (<?php echo get_name_pelanggan($this->uri->rsegments[3]) ?>)
+	<a href="<?php echo @$_SERVER['HTTP_REFERER'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-angle-left"></i>kembali</a>
+	<div class="panel panel-default card card-default">
+		<div class="panel-heading card-header">
+			Data Pelanggan (<?php echo get_name_pelanggan($this->uri->rsegments[3]) ?>)
 			<div class="card-tools">
 				<button type="button" class="btn btn-tool" data-card-widget="collapse">
 					<i class="fas fa-minus"></i>
 				</button>
 			</div>
-			</div>
+		</div>
+		<form action="" method="post" id="form_pelanggan" enctype="multipart/form-data">
 			<div class="panel-body card-body">
 				<div class="form-group">
 					<label for="nik">NIK</label>
@@ -78,6 +78,6 @@
 				<button class="btn btn-success btn-sm" type="submit"><i class="fa fa-save"></i> Simpan</button>
 				<button class="btn btn-warning btn-sm" type="reset"><i class="fa fa-undo"></i> Reset</button>
 			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 </div>

@@ -74,14 +74,18 @@
 									$ccq = '';
 									if ($value['trx'] >= 70) {
 										$trx = 'danger';
-									}elseif ($value['trx'] > 70) {
-										$trx = 'info';
+									}elseif ($value['trx'] >= 50) {
+										$trx = 'warning';
+									}elseif ($value['trx'] < 50) {
+										$trx = 'success';
 									}
 
 									if ($value['ccq'] <= 40) {
 										$ccq = 'danger';
-									}elseif ($value['ccq'] > 40) {
-										$ccq = 'info';
+									}elseif ($value['ccq'] <= 70) {
+										$ccq = 'warning';
+									}elseif ($value['ccq'] > 70) {
+										$ccq = 'success';
 									}
 
 								 ?>

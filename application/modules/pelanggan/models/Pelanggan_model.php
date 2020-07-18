@@ -15,6 +15,21 @@ class Pelanggan_model extends CI_model
 				$current_user = $this->db->get_where('pelanggan', ['id' => $id])->row_array();
 				if ($current_user['id'] == $exist['id'] || empty($exist)) {
 
+
+					if (!empty($_FILES['foto_pelanggan']['name']) || !empty($_FILES['foto_pelanggan']['name'])) {
+						$sizep = $_FILES['foto_pelanggan']['size']/1000;
+						if ($sizep > $config['max_size']) {
+							$msg = ['status'=>'danger', 'msg'=>'ukuran gambar terlalu besar, max ukuran gambar 3Mb'];
+							return $msg;
+						}
+
+						$sizer = $_FILES['foto_rumah']['size']/1000;
+						if ($sizer > $config['max_size']) {
+							$msg = ['status'=>'danger', 'msg'=>'ukuran gambar terlalu besar, max ukuran gambar 3Mb'];
+							return $msg;
+						}
+					}
+
 					if (!empty($_FILES['foto_pelanggan']['name'])) {
 						$format = "";
 						if ($_FILES['foto_pelanggan']['type'] == "image/png") {
@@ -28,7 +43,7 @@ class Pelanggan_model extends CI_model
 							return $msg;
 						}
 
-						$image_name_p = 'pelanggan-' . $this->input->post('nik') . $format;
+						$image_name_p = 'pelanggan-' . date('dmY') . time() . $format;
 
 						$config['upload_path']          = FCPATH .'assets/images/pelanggan/';
 						$config['allowed_types']        = '*';
@@ -62,7 +77,8 @@ class Pelanggan_model extends CI_model
 							return $msg;
 						}
 
-						$image_name_r = 'rumah-' . $this->input->post('nik') . $format;
+
+						$image_name_r = 'rumah-' . date('dmY') . time() . $format;
 
 						$config['upload_path']          = FCPATH .'assets/images/rumah/';
 						$config['allowed_types']        = '*';
@@ -84,8 +100,16 @@ class Pelanggan_model extends CI_model
 					}
 
 					if (empty($data['kordinat'])) {
-						$data['kordinat'] = $data['koordinat'];
+						if (!empty($data['koordinat'])) {
+							$data['kordinat'] = $data['koordinat'];
+						}else{
+							$data['kordinat'] = '-';
+						}
 					}
+
+					// echo "<pre>";
+					// print_r($data);
+					// echo "</pre>";die;
 
 					$this->db->where('id', $id);
 					if ($this->db->update('pelanggan', [
@@ -111,6 +135,14 @@ class Pelanggan_model extends CI_model
 						'no_pelanggan' => $data['no_pelanggan'],
 						'active' => $current_user['active'],
 					])) {
+						if (!empty($data['trx']) && !empty($data['ccq'])) {
+							$this->db->set([
+								'trx' => $data['trx'],
+								'ccq' => $data['ccq']
+							]);
+							$this->db->where('pelanggan_id', $id);
+							$this->db->update('pemasangan');
+						}
 						$msg = ['status' => 'success', 'msg' => 'Pelanggan berhasil disimpan'];
 					}
 				}
@@ -120,8 +152,16 @@ class Pelanggan_model extends CI_model
 				if (empty($exist)) {
 
 					if (empty($data['kordinat'])) {
-						$data['kordinat'] = $data['koordinat'];
+						if (!empty($data['koordinat'])) {
+							$data['kordinat'] = $data['koordinat'];
+						}else{
+							$data['kordinat'] = '-';
+						}
 					}
+
+					// echo "<pre>";
+					// print_r($data);
+					// echo "</pre>";die;
 
 					if ($this->db->insert('pelanggan', [
 						'user_id' => get_user()['id'],
@@ -154,7 +194,12 @@ class Pelanggan_model extends CI_model
 			}
 		}
 		if (!empty($id)) {
-			$msg['data'] = $this->db->get_where('pelanggan', ['id'=>$id])->row_array();
+
+			$this->db->select('*');
+			$this->db->from('pelanggan a');
+			$this->db->join('pemasangan b', 'b.pelanggan_id=a.id', 'inner');
+			$this->db->where('a.id', $id);
+			$msg['data'] = $this->db->get()->row_array();
 
 		}
 		return $msg;
@@ -172,6 +217,21 @@ class Pelanggan_model extends CI_model
 				$current_user = $this->db->get_where('pelanggan', ['id' => $id])->row_array();
 				if (!empty($current_user['id'])) {
 
+					if (!empty($_FILES['foto_pelanggan']['name']) || !empty($_FILES['foto_pelanggan']['name'])) {
+						$sizep = $_FILES['foto_pelanggan']['size']/1000;
+						if ($sizep > $config['max_size']) {
+							$msg = ['status'=>'danger', 'msg'=>'ukuran gambar terlalu besar, max ukuran gambar 3Mb'];
+							return $msg;
+						}
+
+						$sizer = $_FILES['foto_rumah']['size']/1000;
+						if ($sizer > $config['max_size']) {
+							$msg = ['status'=>'danger', 'msg'=>'ukuran gambar terlalu besar, max ukuran gambar 3Mb'];
+							return $msg;
+						}
+					}
+
+
 					if (!empty($_FILES['foto_pelanggan']['name'])) {
 						$format = "";
 						if ($_FILES['foto_pelanggan']['type'] == "image/png") {
@@ -185,7 +245,7 @@ class Pelanggan_model extends CI_model
 							return $msg;
 						}
 
-						$image_name_p = 'pelanggan-' . $this->input->post('nik') . $format;
+						$image_name_p = 'pelanggan-' . date('dmY') . time() . $format;
 
 						$config['upload_path']          = FCPATH .'assets/images/pelanggan/';
 						$config['allowed_types']        = '*';
@@ -219,7 +279,7 @@ class Pelanggan_model extends CI_model
 							return $msg;
 						}
 
-						$image_name_r = 'rumah-' . $this->input->post('nik') . $format;
+						$image_name_r = 'rumah-' . date('dmY') . time() . $format;
 
 						$config['upload_path']          = FCPATH .'assets/images/rumah/';
 						$config['allowed_types']        = '*';
@@ -246,7 +306,11 @@ class Pelanggan_model extends CI_model
 					]);
 
 					if (empty($data['kordinat'])) {
-						$data['kordinat'] = $data['koordinat'];
+						if (!empty($data['koordinat'])) {
+							$data['kordinat'] = $data['koordinat'];
+						}else{
+							$data['kordinat'] = '-';
+						}
 					}
 
 					$this->db->where('pelanggan_id', $id);
@@ -289,7 +353,7 @@ class Pelanggan_model extends CI_model
 			$this->db->from('pelanggan a');
 				if ($filter == 2) {
 					$this->db->join('pemasangan b', 'b.pelanggan_id=a.id', 'inner');
-					$this->db->order_by('a.updated ASC, a.nama ASC');
+					$this->db->order_by('a.updated DESC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
 						$this->db->like('a.active', 2);
@@ -297,28 +361,28 @@ class Pelanggan_model extends CI_model
 					$this->db->where('active', 2);
 				}elseif ($filter == 3) {
 					$this->db->join('pemasangan b', 'b.pelanggan_id=a.id', 'inner');
-					$this->db->order_by('a.updated ASC, a.nama ASC');
+					$this->db->order_by('a.updated DESC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
 						$this->db->like('a.active', 3);
 					}
 					$this->db->where('active', 3);
 				}elseif ($filter == 1) {
-					$this->db->order_by('a.updated ASC, a.nama ASC');
+					$this->db->order_by('a.updated DESC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
 						$this->db->like('a.active', 1);
 					}
 					$this->db->where('active', 1);
 				}elseif ($filter == 4) {
-					$this->db->order_by('a.updated ASC, a.nama ASC');
+					$this->db->order_by('a.updated DESC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
 						$this->db->like('a.active', 4);
 					}
 					$this->db->where('active', 4);
 				}elseif ($filter == 5) {
-					$this->db->order_by('a.updated ASC, a.nama ASC');
+					$this->db->order_by('a.updated DESC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
 						$this->db->like('a.active', 5);
