@@ -32,11 +32,11 @@
 						<div class="card bg-<?php echo $bg_card; ?>">
 							<?php 
 							$size = '250px';
-							if ($value['active'] == 2 || $value['active'] == 3) {
-								$size = '320px';
+							if (($value['active'] == 2) || ($value['active'] == 3)) {
+								$size = '350px';
 							}
 							?>
-							<div class="card-body pt-10" style="height: $size">
+							<div class="card-body pt-10" style="height: <?php echo $size ?>">
 								<div class="row">
 									<div class="col-12">
 										<?php 
