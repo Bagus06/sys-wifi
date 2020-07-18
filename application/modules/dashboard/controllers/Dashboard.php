@@ -19,6 +19,9 @@ class Dashboard extends CI_Controller
 		$this->user_model->check_login();
 
 		$data = $this->dashboard_model->all();
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";die;
 		$this->load->view('index', ['data'=>$data]);
 	}
 }

@@ -4,7 +4,7 @@ class Dashboard_model extends CI_model
 {
 	public function all()
 	{
-		$this->db->select('alat_biaya, active');
+		$this->db->select('alat_biaya, active, desa_id, desa');
 		$bind_pelanggan = $this->db->get('pelanggan')->result_array();
 
 		$msg['cnab']	= [];
@@ -38,6 +38,72 @@ class Dashboard_model extends CI_model
 					}
 				}
 			}
+		}
+
+		$templevelpa='';
+		$newkeypa=0;
+		$grouparrpa[$templevelpa]="";
+
+		foreach ($bind_pelanggan as $key => $val) {
+			if ($val['active'] == 3) {
+				if ($templevelpa==$val['desa']){
+					$grouparrpa[$templevelpa][$newkeypa]=$val['desa_id'];
+				} else {
+					$grouparrpa[$val['desa']][$newkeypa]=$val['desa_id'];
+				}
+				$newkeypa++;
+			}
+		}
+
+		$msg['jml_desa_pa']=[];
+		$forkeypa=0;
+		foreach ($grouparrpa as $key => $vco) {
+			++$forkeypa;
+			$msg['jml_desa_pa'][$key] = count((array)$grouparrpa[$key]);
+		}
+
+		$templevelcp='';
+		$newkeycp=0;
+		$grouparrcp[$templevelcp]="";
+
+		foreach ($bind_pelanggan as $key => $val) {
+			if ($val['active'] == 1) {
+				if ($templevelcp==$val['desa']){
+					$grouparrcp[$templevelcp][$newkeycp]=$val['desa_id'];
+				} else {
+					$grouparrcp[$val['desa']][$newkeycp]=$val['desa_id'];
+				}
+				$newkeycp++;
+			}
+		}
+
+		$msg['jml_desa_cp']=[];
+		$forkeycp=0;
+		foreach ($grouparrcp as $key => $vco) {
+			++$forkeycp;
+			$msg['jml_desa_cp'][$key] = count((array)$grouparrcp[$key]);
+		}
+
+		$templeveldp='';
+		$newkeydp=0;
+		$grouparrdp[$templeveldp]="";
+
+		foreach ($bind_pelanggan as $key => $val) {
+			if ($val['active'] == 2) {
+				if ($templeveldp==$val['desa']){
+					$grouparrdp[$templeveldp][$newkeydp]=$val['desa_id'];
+				} else {
+					$grouparrdp[$val['desa']][$newkeydp]=$val['desa_id'];
+				}
+				$newkeydp++;
+			}
+		}
+
+		$msg['jml_desa_dp']=[];
+		$forkeydp=0;
+		foreach ($grouparrdp as $key => $vco) {
+			++$forkeydp;
+			$msg['jml_desa_dp'][$key] = count((array)$grouparrdp[$key]);
 		}
 
 		$this->db->select('status');

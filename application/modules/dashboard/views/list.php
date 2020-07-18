@@ -160,3 +160,68 @@
     </div>
   </div>
 </div>
+
+<div class="col-md-12">
+  <!-- MAP & BOX PANE -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title btn" data-card-widget="collapse">INFO JUMLAH PELANGGAN PER DESA</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div style="margin: 2%">
+        <h5>Pelanggan Aktif</h5>
+        <div class="col-md-12 row">
+          <?php foreach ($data['jml_desa_pa'] as $key => $jml): ?>
+            <?php if (($key != '-') && !empty($key)): ?>
+              <div style="margin: 3px">
+                <span class="badge badge-success">
+                  <div style="margin: 5px">
+                    <i class="fas fa-lg fa-arrow-alt-circle-right"></i> <?php echo $key ?>(<?php echo $jml ?>)
+                  </div>
+                </span>
+              </div>
+            <?php endif ?>
+          <?php endforeach ?>
+        </div>
+      </div>
+      <div style="margin: 2%">
+        <h5>Dalam Proses Pemasangan</h5>
+        <div class="col-md-12 row">
+          <?php foreach ($data['jml_desa_dp'] as $key => $jml): ?>
+            <?php if (($key != '-') && !empty($key)): ?>
+              <div style="margin: 3px">
+                <span class="badge badge-warning">
+                  <div style="margin: 5px">
+                    <i class="fas fa-lg fa-arrow-alt-circle-right"></i> <?php echo $key ?>(<?php echo $jml ?>)
+                  </div>
+                </span>
+              </div>
+            <?php endif ?>
+          <?php endforeach ?>
+        </div>
+      </div>
+      <div style="margin: 2%">
+        <h5>Calon Pelanggan</h5>
+        <div class="col-md-12 row">
+          <?php foreach ($data['jml_desa_cp'] as $key => $jml): ?>
+            <?php if (($key != '-') && !empty($key)): ?>
+              <div style="margin: 3px">
+                <span class="badge badge-danger">
+                  <div style="margin: 5px">
+                    <i class="fas fa-lg fa-arrow-alt-circle-right"></i> <?php echo $key ?>(<?php echo $jml ?>)
+                  </div>
+                </span>
+              </div>
+            <?php endif ?>
+          <?php endforeach ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
