@@ -9,7 +9,7 @@
 				<?php endforeach ?>	
 		<?php endif ?>
 	<?php endif ?>
-	<a href="<?php echo @$_SERVER['HTTP_REFERER'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-angle-left"></i> Kembali</a>
+	<a href="<?php echo base_url('pelanggan/detail/' . @$data['data']['pelanggan_id']) ?>" class="btn btn-sm btn-warning"><i class="fas fa-angle-left"></i> Kembali</a>
 	<form action="" method="post" id="form_pelanggan" enctype="multipart/form-data">
 		<div class="panel panel-default card card-default">
 			<div class="panel-heading card-header">
