@@ -33,7 +33,7 @@
 							<?php 
 							$size = '250px';
 							if ($value['active'] == 2 || $value['active'] == 3) {
-								$size = '300px';
+								$size = '320px';
 							}
 							?>
 							<div class="card-body pt-10" style="height: $size">
