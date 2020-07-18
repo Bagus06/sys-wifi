@@ -40,7 +40,7 @@ class Dashboard_model extends CI_model
 			}
 		}
 
-		$templevelpa='';
+		$templevelpa='-';
 		$newkeypa=0;
 		$grouparrpa[$templevelpa]="";
 
@@ -62,7 +62,7 @@ class Dashboard_model extends CI_model
 			$msg['jml_desa_pa'][$key] = count((array)$grouparrpa[$key]);
 		}
 
-		$templevelcp='';
+		$templevelcp='-';
 		$newkeycp=0;
 		$grouparrcp[$templevelcp]="";
 
@@ -84,7 +84,7 @@ class Dashboard_model extends CI_model
 			$msg['jml_desa_cp'][$key] = count((array)$grouparrcp[$key]);
 		}
 
-		$templeveldp='';
+		$templeveldp='-';
 		$newkeydp=0;
 		$grouparrdp[$templeveldp]="";
 
