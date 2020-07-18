@@ -165,7 +165,7 @@
   <!-- MAP & BOX PANE -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title btn" data-card-widget="collapse">INFO JUMLAH PELANGGAN PER DESA</h3>
+      <h3 class="card-title btn" data-card-widget="collapse">PETA PENYEBARAN PELANGGAN</h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse">

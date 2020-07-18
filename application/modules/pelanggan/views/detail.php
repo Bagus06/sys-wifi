@@ -66,9 +66,28 @@
 											<td><?php echo $data['nik']; ?></td>
 										</tr>
 										<tr>
+											<?php 
+												$nohp = $data['no_tlp'];
+												$nohp = str_replace(" ","",$nohp);
+												$nohp = str_replace("(","",$nohp);
+												$nohp = str_replace(")","",$nohp);
+												$nohp = str_replace(".","",$nohp);
+
+												if(!preg_match('/[^+0-9]/',trim($nohp)))
+												{
+													if(substr(trim($nohp), 0, 3)=='+62')
+													{
+														$hp = trim($nohp);
+													}
+													elseif(substr(trim($nohp), 0, 1)=='0')
+													{
+														$hp = '+62'.substr(trim($nohp), 1);
+													}
+												}
+											?>
 											<td>No Tlp/WA </td>
 											<td>:</td>
-											<td><?php echo $data['no_tlp']; ?></td>
+											<td><a class="btn btn-sm btn-primary" href="https://api.whatsapp.com/send?phone=<?php echo $hp ?>" target="_blank">klik to chat <?php echo $hp ?></a></td>
 										</tr>
 										<tr>
 											<td>Alamat </td>
