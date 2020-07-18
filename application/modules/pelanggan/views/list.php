@@ -63,6 +63,7 @@
 												$nohp = str_replace("(","",$nohp);
 												$nohp = str_replace(")","",$nohp);
 												$nohp = str_replace(".","",$nohp);
+												$hp = '-';
 
 												if(!preg_match('/[^+0-9]/',trim($nohp)))
 												{
@@ -76,7 +77,7 @@
 													}
 												}
 											?>
-											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-phone"></i></span> Telephone : <a href="https://api.whatsapp.com/send?phone=<?php echo $hp ?>" target="_blank"><?php echo $hp ?></a></li>
+											<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-phone"></i></span> Telephone : <?php if ($hp != '-'): ?><a href="https://api.whatsapp.com/send?phone=<?php echo $hp ?>" target="_blank"><?php echo $hp ?></a><?php else: ?>-<?php endif ?></li>
 
 											<?php if ($value['active'] == 3): ?>
 												<li class="small" style="padding-top: 5px"><span class="fa-li"><i class="fas fa-sm fa-bookmark"></i></span> No PKS : <?php echo $value['no_pelanggan'] ?></li>

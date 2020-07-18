@@ -72,14 +72,14 @@
 												$nohp = str_replace("(","",$nohp);
 												$nohp = str_replace(")","",$nohp);
 												$nohp = str_replace(".","",$nohp);
+												$hp = '-';
 
 												if(!preg_match('/[^+0-9]/',trim($nohp)))
 												{
 													if(substr(trim($nohp), 0, 3)=='+62')
 													{
 														$hp = trim($nohp);
-													}
-													elseif(substr(trim($nohp), 0, 1)=='0')
+													}elseif(substr(trim($nohp), 0, 1)=='0')
 													{
 														$hp = '+62'.substr(trim($nohp), 1);
 													}
@@ -87,7 +87,7 @@
 											?>
 											<td>No Tlp/WA </td>
 											<td>:</td>
-											<td><a class="btn btn-sm btn-primary" href="https://api.whatsapp.com/send?phone=<?php echo $hp ?>" target="_blank">klik to chat <?php echo $hp ?></a></td>
+											<td><?php if ($hp != '-'): ?><a class="btn btn-sm btn-primary" href="https://api.whatsapp.com/send?phone=<?php echo $hp ?>" target="_blank">klik to chat <?php echo $hp ?></a><?php else: ?>-<?php endif ?></td>
 										</tr>
 										<tr>
 											<td>Alamat </td>
