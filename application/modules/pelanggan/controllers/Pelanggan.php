@@ -6,6 +6,7 @@ class Pelanggan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('pelanggan_model');
+		$this->load->model('pemasangan/pemasangan_model');
 		// $this->check_login();
 	}
 
@@ -58,9 +59,15 @@ class Pelanggan extends CI_Controller
 		$config['per_page'] = 12;
 
 		if ($this->input->get('filter')) {
-			$config['reuse_query_string'] = TRUE;
-			$config['suffix'] = '?filter=' . $this->input->get('filter');
-			$config['use_global_url_suffix'] = TRUE;
+			if (!empty($this->input->get('date')) || !empty($this->input->get('metode'))) {
+				$config['reuse_query_string'] = TRUE;
+				$config['suffix'] = '?filter=' . $this->input->get('filter') . '&date=' . $this->input->get('date') . '&metode=' . $this->input->get('metode');
+				$config['use_global_url_suffix'] = TRUE;
+			}else{
+				$config['reuse_query_string'] = TRUE;
+				$config['suffix'] = '?filter=' . $this->input->get('filter');
+				$config['use_global_url_suffix'] = TRUE;
+			}
 		}
 
 
@@ -102,7 +109,7 @@ class Pelanggan extends CI_Controller
 
 		$data = $this->pelanggan_model->all($config['per_page'], $url);
 		$data['url'] = $url;
-		$this->load->view('index', ['data'=>$data, 'count_all'=>$config['total_rows']]);
+		$this->load->view('index', ['data'=>$data, 'count_all'=>$config['total_rows'], 'metode' => $this->pemasangan_model->metode()]);
 	}
 
 	public function pencabutan($id=0)

@@ -128,6 +128,10 @@ function echo_date($date){
 	return date("j F Y", strtotime(@$date));
 }
 
+function echo_date_month($date){
+	return date("F", strtotime(@$date));
+}
+
 function echo_time($time){
 	return date("g:i a", strtotime(@$time));
 }

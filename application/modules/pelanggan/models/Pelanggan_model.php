@@ -347,6 +347,8 @@ class Pelanggan_model extends CI_model
 	{
 		$msg = [];
 		$filter = @$this->input->get('filter');
+		$metode = @$this->input->get('metode');
+		$date = @$this->input->get('date');
 		$search = @$this->input->post('search');
 		if (!empty($filter)) {
 			$this->db->select('*, a.created pendaftaran');
@@ -361,9 +363,18 @@ class Pelanggan_model extends CI_model
 					$this->db->where('active', 2);
 				}elseif ($filter == 3) {
 					$this->db->join('pemasangan b', 'b.pelanggan_id=a.id', 'inner');
+					$this->db->join('selesai c', 'c.pelanggan_id=a.id', 'inner');
 					$this->db->order_by('a.updated DESC, a.nama ASC');
 					if (!empty($search)) {
 						$this->db->like('a.nama', $search);
+						$this->db->like('a.active', 3);
+					}
+					if (!empty($metode)) {
+						$this->db->like('b.metode', $metode);
+						$this->db->like('b.pemasangan', 2);
+					}
+					if (!empty($date)) {
+						$this->db->like('c.tgl_pks', $date);
 						$this->db->like('a.active', 3);
 					}
 					$this->db->where('active', 3);
@@ -436,7 +447,22 @@ class Pelanggan_model extends CI_model
 
 	public function count_pelanggan()
 	{
-		if (empty($this->input->post('search'))) {
+		$metode = @$this->input->get('metode');
+		$date = @$this->input->get('date');
+		if (!empty($metode) || !empty($date)) {
+			$this->db->select('a.id');
+			$this->db->from('pelanggan a');
+			$this->db->join('pemasangan b', 'b.pelanggan_id=a.id', 'inner');
+			$this->db->join('selesai c', 'c.pelanggan_id=a.id', 'inner');
+			if (!empty($metode)) {
+				$this->db->like('b.metode', $metode);
+			}
+			if (!empty($date)) {
+				$this->db->like('c.tgl_pks', $date);
+			}
+			$this->db->like('a.active', 3);
+			return $this->db->get()->num_rows();
+		}elseif (empty($this->input->post('search'))) {
 			if (!empty($this->input->get('filter'))) {
 				return $this->db->get_where('pelanggan', ['active'=>$this->input->get('filter')])->num_rows();
 			}else{

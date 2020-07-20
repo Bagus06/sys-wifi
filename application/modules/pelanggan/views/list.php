@@ -1,6 +1,45 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!-- Default box -->
 <div class="table-responsive">
+	<?php if (!empty($this->input->get('filter'))): ?>
+		<?php if ($this->input->get('filter') == 3): ?>
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Filter</h3>
+				</div>
+				<div class="card-body">
+					<form action="<?php echo base_url('pelanggan/list/') ?>" method="get">
+						<div class="col-md-12 row" style="margin: 1px">
+							<input type="hidden" name="filter" value="3">
+							<div class="form-group col-md-5">
+								<label>Tanggal PKS</label>
+								<div class="input-group">
+									<input value="<?php echo @$this->input->get('date'); ?>" name="date" type="date" class="form-control float-right">
+								</div>
+								<!-- /.input group -->
+							</div>
+							<div class="form-group col-md-6">
+								<label>Metode</label>
+								<select name="metode" class="form-control select2" style="width: 100%;">
+									<option value="0">none</option>
+									<?php foreach ($metode as $key => $vm): ?>
+										<?php $selected = ''; ?>
+										<?php if ($vm['id'] == @$this->input->get('metode')): ?>
+											<?php $selected='selected' ?>
+										<?php endif ?>
+										<option value="<?php echo $vm['id'] ?>" <?php echo $selected; ?>><?php echo $vm['title'] ?></option>
+									<?php endforeach ?>
+								</select>
+							</div>
+							<div class="col-md-1" style="text-align: right; padding-top: 3%">
+								<button type="submit" class="btn btn-success">Filter</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		<?php endif ?>
+	<?php endif ?>
 	<div class="card card-solid">
 		<div class="card-header pb-0">
 			<form action="" method="post">
@@ -14,7 +53,11 @@
 			<div class="text-left row">
 				<p style="padding-right: 8px;"><i class="fas fa-square-full" style="color:#EEEEEE"></i> biaya tambahan</p>
 				<p style="padding-right: 8px;"><i class="fas fa-square-full" style="color:#2E2E2E"></i> tanpa biaya tambahan</p>
-				<p style="padding-right: 8px;">Jumlah (<?php echo $count_all; ?>)</p>
+				<p style="padding-right: 8px;">Jumlah (<?php echo $count_all; ?>) | </p>
+				<p style="padding-right: 8px;">PTP (<?php echo count_p()['ptp'] ?>) | </p>
+				<p style="padding-right: 8px;">PTP Induk (<?php echo count_p()['ptpi'] ?>) | </p>
+				<p style="padding-right: 8px;">PTMP (<?php echo count_p()['ptmp'] ?>) | </p>
+				<p style="padding-right: 8px;">PULL WIRES (<?php echo count_p()['pw'] ?>)</p>
 			</div>
 		</div>
 		<div class="card-body pb-0">
