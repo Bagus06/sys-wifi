@@ -24,6 +24,9 @@
 <!-- daterangepicker -->
 <script src="<?php echo base_url(); ?>assets/vendor/moment/moment.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/daterangepicker/daterangepicker.js"></script>
+<!-- InputMask -->
+<script src="<?php echo base_url(); ?>assets/vendor/moment/moment.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/vendor/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="<?php echo base_url(); ?>assets/vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
@@ -61,6 +64,8 @@
 
 	    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
 	})
+	//Money Euro
+    $('[data-mask]').inputmask()
 </script>
 <?php
 if($this->uri->uri_string == 'pelanggan/edit' || ($this->uri->segments[1] == 'pelanggan' && $this->uri->segments[2] == 'edit_pelanggan') || ($this->uri->segments[1] == 'pelanggan' && $this->uri->segments[2] == 'edit_selesai'))

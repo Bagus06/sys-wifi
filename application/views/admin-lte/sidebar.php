@@ -7,6 +7,7 @@ $link2 = $this->uri->rsegments[2];
 $get = @$this->input->get('filter');
 $fa = @$this->input->get('fa');
 $fm = @$this->input->get('fm');
+$fls = @$this->input->get('fls');
 
 if ($link1 == 'dashboard') {
 	$mo0 = 'menu-open';
@@ -41,6 +42,16 @@ if ($link1 == 'agenda') {
 		}
 	}elseif ($link2 == 'edit') {
 		$tagnd = 'active';
+	}
+}
+
+if ($link1 == 'library_scurity') {
+	$mo7 = 'menu-open';
+	$ma7 = 'active';
+	if ($link2 == 'list') {
+		$lls = 'active';
+	}elseif ($link2 == 'edit') {
+		$tls = 'active';
 	}
 }
 
@@ -304,6 +315,29 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 						</a>
 					</li>
 				</ul>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-item has-treeview <?php echo @$mo7; ?>">
+		<a href="#" class="nav-link <?php echo @$ma7; ?>">
+			<i class="nav-icon fas fa-laptop"></i>
+			<p>
+				LIBRARY SCURITY
+				<i class="fas fa-angle-left right"></i>
+			</p>
+		</a>
+		<ul class="nav nav-treeview">
+			<li class="nav-item">
+				<a href="<?php echo base_url("library_scurity/edit") ?>" class="nav-link <?php echo @$tls; ?>">
+					<i class="far fa-circle nav-icon"></i>
+					<p>Tambah Scurity</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="<?php echo base_url("library_scurity/list") ?>" class="nav-link <?php echo @$lls; ?>">
+					<i class="far fa-circle nav-icon"></i>
+					<p>List Scurity</p>
+				</a>
 			</li>
 		</ul>
 	</li>

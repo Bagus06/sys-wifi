@@ -411,6 +411,12 @@ class Pelanggan_model extends CI_model
 		return $msg;
 	}
 
+	public function for_api()
+	{
+		$this->db->select('id,nama');
+		return $this->db->get_where('pelanggan', ['active'=>3])->result_array();
+	}
+
 	public function detail($id=0)
 	{
 		$this->db->select('*, b.created pendaftaran');
