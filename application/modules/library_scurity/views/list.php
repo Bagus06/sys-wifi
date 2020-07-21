@@ -59,19 +59,19 @@
                 </td>
                 <td>
                   <a>
-                    <?php echo $value['ip'] ?>
+                    <span onclick="copyTeks()" id="dataCopy"><?php echo $value['ip'] ?></span>
                   </a>
                 </td>
                 <td>
                   <a>
-                    <?php echo $value['mac'] ?>
+                    <span onclick="copyTeks()" id="dataCopy"><?php echo $value['mac'] ?></span>
                   </a>
                 </td>
                 <td>
-                  <?php echo $value['username'] ?>
+                  <span onclick="copyTeks()" id="dataCopy"><?php echo $value['username'] ?></span>
                 </td>
                 <td>
-                  <?php echo $value['password'] ?>
+                  <span onclick="copyTeks()" id="dataCopy"><?php echo $value['password'] ?></span>
                 </td>
                 <td class="project-actions text-center">
                   <a href="<?php echo base_url('library_scurity/edit/' . $value['id']) ?>" class="bt btn-sm btn-info">Edit</a>

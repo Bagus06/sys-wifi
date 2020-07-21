@@ -29,6 +29,14 @@
 <!-- summernote -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/summernote/summernote-bs4.css">
 <!-- loading style -->
+<style type="text/css">
+	strong{
+		cursor: pointer;
+	}
+	strong:hover{
+		color: blue
+	}
+</style>
 <style>
 	#loading{
 		width: 70px;
