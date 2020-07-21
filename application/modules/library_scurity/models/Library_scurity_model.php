@@ -2,9 +2,29 @@
 
 class Library_scurity_model extends CI_model
 {
-	public function all($limit, $start)
+	public function all($id, $limit, $start)
 	{
 		$msg = [];
+
+		if (!empty($id)) {
+			$status = $this->input->get('switch');
+			if (!empty($status)) {
+				$to_set = 0;
+				if ($status == 1) {
+					$to_set = 2;
+				}elseif ($status == 2) {
+					$to_set = 1;
+				}
+				$this->db->set([
+					'status' => $to_set
+				]);
+				$this->db->where('id', $id);
+				if ($this->db->update('library_scurity')) {
+					redirect(base_url('library_scurity/list'));
+				}
+			}
+		}
+
 		if (empty($this->input->get('fls'))) {
 			$this->db->limit($limit, $start);
 			$msg['data'] = $this->db->get('library_scurity')->result_array();
