@@ -28,9 +28,11 @@ class Library_scurity_model extends CI_model
 		}
 
 		if (empty($this->input->get('fls'))) {
+			$this->db->order_by('id DESC');
 			$this->db->limit($limit, $start);
 			$msg['data'] = $this->db->get('library_scurity')->result_array();
 		}else{
+			$this->db->order_by('id DESC');
 			$this->db->limit($limit, $start);
 			$msg['data'] = $this->db->get('library_scurity')->result_array();
 		}

@@ -40,22 +40,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url(); ?>assets/js/demo.js"></script>
 <!-- <script src="<?php echo base_url(); ?>assets/js/api_addres.js"></script> -->
-
-<script type="text/javascript">
-	var span = document.querySelector("span");
-	function copyTeks(){
-		document.querySelector("span");
-		document.execCommand("copy");
-		alert("data '" + span.textContent + "' berhasil di salin" )
-	}
-	span.addEventListener("copy", function(event) {
-		event.preventDefault();
-		if (event.clipboardData) {
-			event.clipboardData.setData("text/plain", span.textContent);
-			console.log(event.clipboardData.getData("text"))
-		}
-	});
-</script>
 <!-- loading script -->
 <script>
 	var loading = document.getElementById('loading');

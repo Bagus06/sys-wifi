@@ -59,7 +59,7 @@
                 </td>
                 <td>
                   <a>
-                    <span onclick="copyTeks()" id="dataCopy"><?php echo $value['ip'] ?></span>
+                    <span onclick="copyTeks . $value['id']()" id="dataCopy"><?php echo $value['ip'] ?></span>
                   </a>
                 </td>
                 <td>
