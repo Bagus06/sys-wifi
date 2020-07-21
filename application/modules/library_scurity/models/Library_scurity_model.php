@@ -21,6 +21,8 @@ class Library_scurity_model extends CI_model
 				$this->db->where('id', $id);
 				if ($this->db->update('library_scurity')) {
 					redirect(base_url('library_scurity/list'));
+				}else{
+					redirect(base_url('library_scurity/list'));
 				}
 			}
 		}
