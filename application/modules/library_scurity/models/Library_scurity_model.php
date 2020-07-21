@@ -83,6 +83,7 @@ class Library_scurity_model extends CI_model
 					'mac' => $data['mac'],
 					'username' => $data['username'],
 					'password' => $data['password'],
+					'status' => 1,
 				];
 
 				if (empty($exits)) {
