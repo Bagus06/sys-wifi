@@ -30,7 +30,7 @@ class Library_scurity_model extends CI_model
 		if (!empty($this->input->get('pelanggan'))) {
 			$this->db->order_by('id DESC');
 			$this->db->limit($limit, $start);
-			$msg['data'] = $this->db->get('library_scurity', ['pelanggan_id'=>$this->input->get('pelanggan')])->result_array();
+			$msg['data'] = $this->db->get_where('library_scurity', ['pelanggan_id'=>$this->input->get('pelanggan')])->result_array();
 		}else{
 			$this->db->order_by('id DESC');
 			$this->db->limit($limit, $start);
