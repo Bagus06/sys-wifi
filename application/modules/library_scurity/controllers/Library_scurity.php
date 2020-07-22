@@ -67,6 +67,7 @@ class Library_scurity extends CI_Controller
 		// print_r($data);die;
 		// echo "</pre>";
 		$data['url'] = $url;
+		$data['pelanggan'] = $this->pelanggan_model->for_api();
 		$this->load->view('index', ['data'=>$data]);
 	}
 

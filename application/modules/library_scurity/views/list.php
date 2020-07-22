@@ -3,6 +3,39 @@
 <div class="col-md-12">
  <!-- Main content -->
  <section class="content">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Filter</h3>
+    </div>
+    <div class="card-body">
+      <form action="" method="get">
+        <div class="col-md-12 row" style="margin: 1px">
+          <!-- <div class="form-group col-md-5">
+            <label>Tanggal PKS</label>
+            <div class="input-group">
+              <input value="<?php echo @$this->input->get('date'); ?>" name="date" type="date" class="form-control float-right">
+            </div>
+          </div> -->
+          <div class="form-group col-md-6">
+            <label>Nama Pelanggan</label>
+            <select name="pelanggan" class="form-control select2" style="width: 100%;">
+              <option value="0">none</option>
+              <?php foreach ($data['pelanggan'] as $key => $vp): ?>
+                <?php $selected = ''; ?>
+                <?php if ($vp['id'] == @$this->input->get('pelanggan')): ?>
+                  <?php $selected='selected' ?>
+                <?php endif ?>
+                <option value="<?php echo $vp['id'] ?>" <?php echo $selected; ?>><?php echo $vp['nama'] ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+          <div class="col-md-1" style="text-align: right; padding-top: 3%">
+            <button type="submit" class="btn btn-success">Filter</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Default box -->
   <div class="card">

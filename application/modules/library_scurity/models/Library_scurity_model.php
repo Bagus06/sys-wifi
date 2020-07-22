@@ -27,11 +27,12 @@ class Library_scurity_model extends CI_model
 			}
 		}
 
-		if (empty($this->input->get('fls'))) {
+		if (empty($this->input->get('pelanggan'))) {
 			$this->db->order_by('id DESC');
 			$this->db->limit($limit, $start);
 			$msg['data'] = $this->db->get('library_scurity')->result_array();
 		}else{
+			$this->db->like('pelanggan_id', $this->input->get('pelanggan'));
 			$this->db->order_by('id DESC');
 			$this->db->limit($limit, $start);
 			$msg['data'] = $this->db->get('library_scurity')->result_array();
@@ -42,9 +43,10 @@ class Library_scurity_model extends CI_model
 
 	public function count_library_scurity()
 	{
-		if (empty($this->input->get('fls'))) {
-			return $this->db->get('library_scurity')->num_rows();
+		if (empty($this->input->get('pelanggan'))) {
+			return $this->db->get_where('library_scurity')->num_rows();
 		}else{
+			$this->db->like('pelanggan_id', $this->input->get('pelanggan'));
 			return $this->db->get('library_scurity')->num_rows();
 		}
 	}
