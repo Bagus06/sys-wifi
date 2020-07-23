@@ -140,5 +140,9 @@ function money($nominal){
 	
 	$covert = "Rp " . number_format($nominal,2,',','.');
 	return $covert;
- 
+}
+
+function preg_angka($string){
+	$result = preg_replace("/[^0-9]/", "", $string);
+	return $result;
 }

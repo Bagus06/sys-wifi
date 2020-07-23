@@ -174,7 +174,7 @@
     <div class="card-body p-0">
       <div class="row">
         <div class="col-md-6 col-sm-6 col-12">
-          <a href="<?php echo base_url("maintance/list/?fm=1") ?>" style="color: black">
+          <a href="<?php echo base_url("agenda/list") ?>" style="color: black">
             <div class="info-box">
               <span class="info-box-icon bg-success"><i class="nav-icon fas fa-clipboard-list"></i></span>
 
@@ -189,7 +189,7 @@
         </div>
         <!-- /.col -->
         <div class="col-md-6 col-sm-6 col-12">
-          <a href="<?php echo base_url("maintance/list/?fm=3") ?>" style="color: black">
+          <a href="<?php echo base_url("agenda/list/?fa=2") ?>" style="color: black">
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="nav-icon fas fa-clipboard-list"></i></span>
 
@@ -223,7 +223,7 @@
     <div class="card-body p-0">
       <div class="row">
         <div class="col-md-6 col-sm-6 col-12">
-          <a href="<?php echo base_url("maintance/list/?fm=1") ?>" style="color: black">
+          <a href="<?php echo base_url("laporan/list") ?>" style="color: black">
             <div class="info-box">
               <span class="info-box-icon bg-success"><i class="nav-icon fas fa-atlas"></i></span>
 
@@ -238,7 +238,7 @@
         </div>
         <!-- /.col -->
         <div class="col-md-6 col-sm-6 col-12">
-          <a href="<?php echo base_url("maintance/list/?fm=3") ?>" style="color: black">
+          <a href="<?php echo base_url("laporan/list/?bi=" . date('Y-m')) ?>" style="color: black">
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="nav-icon fas fa-atlas"></i></span>
 
