@@ -9,7 +9,7 @@ class Laporan_keuangan_model extends CI_model
 		$pelanggan = $this->input->get('pelanggan');
 		$desa = $this->input->get('desa');
 
-		$this->db->select('a.id, b.id p_id, nama, b.desa, b.desa_id, nominal, jatuh_tempo, rentan');
+		$this->db->select('a.id, nama, b.desa, b.desa_id, nominal, jatuh_tempo, rentan');
 		$this->db->from('config_pembayaran a');
 		$this->db->join('pelanggan b', 'b.id=a.pelanggan_id', 'inner');
 		if (!empty($filter)) {
@@ -31,6 +31,18 @@ class Laporan_keuangan_model extends CI_model
 		foreach ($msg['his'] as $key => $value) {
 			$msg['history'] = [$value['config_pembayaran_id']];
 		}
+
+		$this->db->select('config_pembayaran_id');
+		$this->db->from('history_pembayaran');
+		$this->db->like('created', date('Y'), 'after');
+		$msg['his_mont'] = $this->db->get()->result_array();
+
+		$msg['history_month'] = []; 
+		foreach ($msg['his_mont'] as $key => $value) {
+			$msg['history_month'] = [$value['config_pembayaran_id']];
+		}
+
+		// print_r($msg['data']);die;
 
 		return $msg;
 	}

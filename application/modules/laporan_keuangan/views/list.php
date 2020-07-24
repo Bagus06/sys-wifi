@@ -158,16 +158,16 @@
 	                		$text = 'belum terbayar';
 	                	}
                 	}elseif ($value['rentan'] == 2) {
-                		if (in_array($value['id'], $data['history'])) {
+                		if (in_array($value['id'], $data['history_month'])) {
 	                		if ($month >= $value['jatuh_tempo']) {
-	                			$status = '#14D700';
-	                		}elseif ($month < $value['jatuh_tempo']) {
 	                			$status = '#A7A7A7';
+	                		}elseif ($month < $value['jatuh_tempo']) {
+	                			$status = '#14D700';
 	                		}
 	                		$text = 'terbayar';
-	                	}elseif(!in_array($value['id'], $data['history'])){
+	                	}elseif(!in_array($value['id'], $data['history_month'])){
 	                		if ($month <= $value['jatuh_tempo']) {
-	                			$status = '#14D700';
+	                			$status = '#FFF000';
 	                		}elseif ($month > $value['jatuh_tempo']) {
 	                			$status = '#000000';
 	                		}
@@ -190,10 +190,13 @@
 	                  			<a href="" class="btn btn-sm btn-success">Bayar</a>
 	                  		<?php endif ?>
                 		<?php endif ?>
-                	<?php elseif($value['rentan'] == 2): ?>
-                		<?php if ($month <= $value['jatuh_tempo']): ?>
-                			<a href="" class="btn btn-sm btn-success">Bayar</a>
-                		<?php endif ?>
+                  	<?php endif ?>
+                  	<?php if(!in_array($value['id'], $data['history_month'])): ?>
+	                  	<?php if($value['rentan'] == 2): ?>
+	                		<?php if ($month <= $value['jatuh_tempo']): ?>
+	                			<a href="" class="btn btn-sm btn-success">Bayar</a>
+	                		<?php endif ?>
+	                  	<?php endif ?>
                   	<?php endif ?>
                 </td>
               </tr>
