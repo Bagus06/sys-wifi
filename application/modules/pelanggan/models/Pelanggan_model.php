@@ -424,7 +424,7 @@ class Pelanggan_model extends CI_model
 
 	public function for_api()
 	{
-		$this->db->select('id,nama');
+		$this->db->select('id,nama, desa_id');
 		return $this->db->get_where('pelanggan', ['active'=>3])->result_array();
 	}
 

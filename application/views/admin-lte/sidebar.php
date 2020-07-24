@@ -52,6 +52,8 @@ if ($link1 == 'laporan_keuangan') {
 		$lk = 'active';
 	}elseif ($link2 == 'edit_config') {
 		$tcp = 'active';
+	}elseif ($link2 == 'list_config') {
+		$lcp = 'active';
 	}
 }
 
@@ -417,13 +419,22 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		<p>
 			LAPORAN KEUANGAN
 			<i class="fas fa-angle-left right"></i>
+			<br><small>Trial</small>
 		</p>
 	</a>
 	<ul class="nav nav-treeview">
 		<li class="nav-item">
 			<a href="<?php echo base_url('laporan_keuangan/edit_config'); ?>" class="nav-link <?php echo @$tcp; ?>">
 				<i class="far fa-circle nav-icon"></i>
-				<p>Tambah Config Pembayaran</p>
+				<p>Tambah Config</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/list_config'); ?>" class="nav-link <?php echo @$lcp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>List Config</p>
 			</a>
 		</li>
 	</ul>
@@ -431,7 +442,7 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		<li class="nav-item">
 			<a href="<?php echo base_url('laporan_keuangan/list'); ?>" class="nav-link <?php echo @$lk; ?>">
 				<i class="far fa-circle nav-icon"></i>
-				<p>Rekap</p>
+				<p>Pembayaran</p>
 			</a>
 		</li>
 	</ul>

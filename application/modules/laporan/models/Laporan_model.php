@@ -13,8 +13,13 @@ class Laporan_model extends CI_model
 		$filter_by_bi = $this->input->get('bi');
 
 		if (!empty($filter)) {
-			if (!empty($filter_by_bi)) {
-				$this->db->like('created', $filter_by_bi, 'after');
+			if (empty($filter_by_date)) {
+				if (!empty($filter_by_bi)) {
+					$this->db->like('created', $filter_by_bi, 'after');
+					if (!empty($filter_by_name)) {
+						$this->db->like('user_id', $filter_by_name);
+					}
+				}
 			}
 			if (!empty($filter_by_date)) {
 				$this->db->like('created', $filter_by_date);

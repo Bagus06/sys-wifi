@@ -2,6 +2,88 @@
 
 class Laporan_keuangan_model extends CI_model
 {
+	public function all()
+	{
+		$msg = [];
+		$filter = $this->input->get();
+		$pelanggan = $this->input->get('pelanggan');
+		$desa = $this->input->get('desa');
+
+		$this->db->select('a.id, b.id p_id, nama, b.desa, b.desa_id, nominal, jatuh_tempo, rentan');
+		$this->db->from('config_pembayaran a');
+		$this->db->join('pelanggan b', 'b.id=a.pelanggan_id', 'inner');
+		if (!empty($filter)) {
+			if (!empty($pelanggan)) {
+				$this->db->like('b.id', $pelanggan);
+			}elseif (!empty($desa)) {
+				$this->db->like('b.desa_id', $desa);
+			}
+		}
+		$this->db->order_by('b.desa ASC');
+		$msg['data'] = $this->db->get()->result_array();
+
+		$this->db->select('config_pembayaran_id');
+		$this->db->from('history_pembayaran');
+		$this->db->like('created', date('Y-m'), 'after');
+		$msg['his'] = $this->db->get()->result_array();
+
+		$msg['history'] = []; 
+		foreach ($msg['his'] as $key => $value) {
+			$msg['history'] = [$value['config_pembayaran_id']];
+		}
+
+		return $msg;
+	}
+
+	public function count_pembayaran()
+	{
+		$filter = $this->input->get();
+		$pelanggan = $this->input->get('pelanggan');
+		$desa = $this->input->get('desa');
+		if (!empty($filter)) {
+			$this->db->select('a.id');
+			$this->db->from('config_pembayaran a');
+			$this->db->join('pelanggan b', 'b.id=a.pelanggan_id', 'inner');
+			if (!empty($pelanggan)) {
+				$this->db->like('b.id', $pelanggan);
+			}elseif (!empty($desa)) {
+				$this->db->like('b.desa_id', $desa);
+			}
+			return $this->db->get()->num_rows();
+		}else{
+			$this->db->select('a.id');
+			$this->db->from('config_pembayaran a');
+			$this->db->join('pelanggan b', 'b.id=a.pelanggan_id', 'inner');
+			return $this->db->get()->num_rows();
+		}
+	}
+
+	public function all_config($limit, $start)
+	{
+		$msg = [];
+		$this->db->select('a.id, nama, jatuh_tempo, nominal, rentan');
+		$this->db->from('config_pembayaran a');
+		$this->db->join('pelanggan b', 'b.id=a.pelanggan_id', 'inner');
+		$this->db->order_by('b.nama ASC');
+		if (!empty($this->input->get('pelanggan'))) {
+			$this->db->where('a.pelanggan_id', $this->input->get('pelanggan'));
+		}
+		$this->db->limit($limit, $start);
+		$msg['data'] = $this->db->get()->result_array();
+
+		return $msg;
+	}
+
+	public function count_config()
+	{
+		if (!empty($this->input->get('pelanggan'))) {
+			$ret = 0;
+			return $ret;
+		}else{
+			return $this->db->get('config_pembayaran')->num_rows();
+		}
+	}
+
 	public function save_config($id=0)
 	{
 		$msg = [];
@@ -38,7 +120,7 @@ class Laporan_keuangan_model extends CI_model
 					$this->db->select('id');
 					$bind = $this->db->get_where('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id'], 'jatuh_tempo' => $data['jatuh_tempo']])->row_array();
 
-					if (($bind['id'] == $id) || empty($bind)) {
+					if ((@$bind['id'] == $id) || empty($bind)) {
 						$this->db->set($data);
 						$this->db->where('id', $id);
 						if ($this->db->update('config_pembayaran')) {
@@ -53,7 +135,7 @@ class Laporan_keuangan_model extends CI_model
 					$msg['msgs'][] = 'config pembayaran yang anda edit tidak ditemukan di server.';
 				}
 			}else{
-				$exits = $this->db->get_where('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id']])->num_rows();
+				$exits = $this->db->get_where('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id'], 'rentan'=>$data['rentan']])->num_rows();
 
 				if (!empty($data['bulan'])) {
 					$data['jatuh_tempo'] = $data['bulan'];
@@ -80,7 +162,7 @@ class Laporan_keuangan_model extends CI_model
 					'status' => 1,
 				];
 				$this->db->select('id, jatuh_tempo');
-				$bind = $this->db->get_where('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id'], 'jatuh_tempo' => $data['jatuh_tempo']])->row_array();
+				$bind = $this->db->get_where('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id'], 'jatuh_tempo' => $data['jatuh_tempo'], 'rentan'=>$data['rentan']])->row_array();
 				if ($data['rentan'] == 1) {
 					if (empty($bind)) {
 						$this->db->delete('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id'], 'rentan'=>2]);
@@ -96,14 +178,16 @@ class Laporan_keuangan_model extends CI_model
 					}
 				}elseif ($data['rentan'] == 2) {
 					if (empty($bind)) {
-						$this->db->delete('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id'], 'rentan'=>1]);
-						if ($exits <= 1) {
+						if ($exits < 1) {
+							$this->db->delete('config_pembayaran', ['pelanggan_id'=>$data['pelanggan_id'], 'rentan'=>1]);
 							if ($this->db->insert('config_pembayaran', $data)) {
 								$msg = ['status' => 'success', 'msg' => 'config pembayaran berhasil disimpan'];
 							}
 						}else{
 							$msg['msgs'][] = 'config pembayaran tempo per tahun maximal hanya 1.';
 						}
+					}else{
+						$msg['msgs'][] = 'jatuh tempo yang anda masukkan sudah ada.';
 					}
 				}else{
 					$msg['msgs'][] = 'anda harus mengisi tempo.';
@@ -175,8 +259,28 @@ class Laporan_keuangan_model extends CI_model
 	{
 		$tempo = [
 			'0' => ['id' => 1, 'title' => 'Per Bulan'],
-			'1' => ['id' => 2, 'title' => 'Per Pertahun'],
+			'1' => ['id' => 2, 'title' => 'Per Tahun'],
 		];
 		return $tempo;
+	}
+
+	public function desa()
+	{
+		$this->db->select('id, active, desa_id, desa');
+		$bind_pelanggan = $this->db->get_where('pelanggan', ['active'=>3])->result_array();
+
+		$templevelpa='-';
+		$newkeypa=0;
+		$grouparrpa[$templevelpa]="";
+
+		foreach ($bind_pelanggan as $key => $val) {
+			if ($templevelpa == $val['desa']){
+				$grouparrpa[$templevelpa]=$val['desa_id'];
+			} else {
+				$grouparrpa[$val['desa']]=$val['desa_id'];
+			}
+			$newkeypa++;
+		}
+		return $grouparrpa;
 	}
 }
