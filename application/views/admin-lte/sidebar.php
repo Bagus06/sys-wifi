@@ -54,6 +54,10 @@ if ($link1 == 'laporan_keuangan') {
 		$tcp = 'active';
 	}elseif ($link2 == 'list_config') {
 		$lcp = 'active';
+	}elseif ($link2 == 'history_pembayaran') {
+		$hp = 'active';
+	}elseif ($link2 == 'rekap_pendapatan') {
+		$rp = 'active';
 	}
 }
 
@@ -419,7 +423,7 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		<p>
 			LAPORAN KEUANGAN
 			<i class="fas fa-angle-left right"></i>
-			<br><small>Trial</small>
+			<!-- <br><small>Trial</small> -->
 		</p>
 	</a>
 	<ul class="nav nav-treeview">
@@ -443,6 +447,22 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 			<a href="<?php echo base_url('laporan_keuangan/list'); ?>" class="nav-link <?php echo @$lk; ?>">
 				<i class="far fa-circle nav-icon"></i>
 				<p>Pembayaran</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/history_pembayaran'); ?>" class="nav-link <?php echo @$hp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>History Pembayaran</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/rekap_pendapatan'); ?>" class="nav-link <?php echo @$rp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Rekap Pendapatan</p>
 			</a>
 		</li>
 	</ul>

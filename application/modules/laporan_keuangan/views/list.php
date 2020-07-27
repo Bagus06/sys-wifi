@@ -51,6 +51,14 @@
       </form>
     </div>
   </div>
+  <?php if (!empty($data['msg'])): ?>
+  	<?php echo alert($data['status'],$data['msg']) ?>
+  	<?php if (!empty($data['msgs'])): ?>
+  		<?php foreach ($data['msgs'] as $key => $value): ?>
+  			<?php echo alert($data['status'], $value) ?>
+  		<?php endforeach ?>	
+  	<?php endif ?>
+  <?php endif ?>
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Data <?php echo $this->uri->rsegments[2] ?></h3>
@@ -187,15 +195,61 @@
                 	<?php if(!in_array($value['id'], $data['history'])): ?>
                 		<?php if ($value['rentan'] == 1): ?>
 	                  		<?php if ($date < '25'): ?>
-	                  			<a href="" class="btn btn-sm btn-success">Bayar</a>
+	                  			<a href="" data-toggle="modal" data-target="#modal-pembayaran<?php echo $value['id'] ?>" class="btn btn-sm btn-success">Bayar</a>
+                            <div class="modal fade" id="modal-pembayaran<?php echo $value['id'] ?>">
+                              <div class="modal-dialog">
+                                <div class="modal-content bg-success">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Pembayaran</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body" align="left">
+                                      <h5>Pembayaran atas nama <?php echo $value['nama']; ?> sejumlah <?php echo money($value['nominal']); ?>.</h5>
+                                    </div>
+                                    <form action="" method="get">
+                                      <input type="hidden" name="pembayaran" value="<?php echo $value['id'] ?>">
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-outline-light">Bayar</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                  <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                              </div>
 	                  		<?php endif ?>
                 		<?php endif ?>
                   	<?php endif ?>
                   	<?php if(!in_array($value['id'], $data['history_month'])): ?>
 	                  	<?php if($value['rentan'] == 2): ?>
-	                		<?php if ($month <= $value['jatuh_tempo']): ?>
-	                			<a href="" class="btn btn-sm btn-success">Bayar</a>
-	                		<?php endif ?>
+  	                		<?php if ($month <= $value['jatuh_tempo']): ?>
+  	                			<a href="" data-toggle="modal" data-target="#modal-pembayaran<?php echo $value['id'] ?>" class="btn btn-sm btn-success">Bayar</a>
+  	                  			<div class="modal fade" id="modal-pembayaran<?php echo $value['id'] ?>">
+  	                  				<div class="modal-dialog">
+  	                  					<div class="modal-content bg-success">
+  	                  						<div class="modal-header">
+  	                  							<h4 class="modal-title">Pembayaran</h4>
+  	                  							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  	                  								<span aria-hidden="true">&times;</span></button>
+  	                  							</div>
+  	                  							<div class="modal-body" align="left">
+  	                  								<h5>Pembayaran atas nama <?php echo $value['nama']; ?> sejumlah <?php echo money($value['nominal']); ?>.</h5>
+  	                  							</div>
+  	                  							<form action="" method="get">
+  	                  								<input type="hidden" name="pembayaran" value="<?php echo $value['id'] ?>">
+  	                  								<div class="modal-footer justify-content-between">
+  	                  									<button type="button" class="btn btn-outline-light" data-dismiss="modal">Batal</button>
+  	                  									<button type="submit" class="btn btn-outline-light">Bayar</button>
+  	                  								</div>
+  	                  							</form>
+  	                  						</div>
+  	                  						<!-- /.modal-content -->
+  	                  					</div>
+  	                  					<!-- /.modal-dialog -->
+  	                  				</div>
+  	                		<?php endif ?>
 	                  	<?php endif ?>
                   	<?php endif ?>
                 </td>

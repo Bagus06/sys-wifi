@@ -2,12 +2,65 @@
 
 class Laporan_keuangan_model extends CI_model
 {
-	public function all()
+	public function rekap_pendapatan()
 	{
 		$msg = [];
+		$this->db->select('id, nominal, rentan, jatuh_tempo');
+		$this->db->from('config_pembayaran');
+		$config_pembayaran = $this->db->get()->result_array();
+
+		$this->db->select('a.id, a.created, b.nominal');
+		$this->db->from('history_pembayaran a');
+		$this->db->join('config_pembayaran b', 'b.id=a.config_pembayaran_id', 'inner');
+		$this->db->like('a.created', date('Y-m'), 'after');
+		$history_pembayaran = $this->db->get()->result_array();
+
+		$rentan1 = 0;
+		$rentan2 = 0;
+		foreach ($config_pembayaran as $key => $cp) {
+			if ($cp['rentan'] == 1) {
+				$rentan1 += $cp['nominal'];
+			}elseif (($cp['rentan'] == 2) && ($cp['jatuh_tempo'] == date('m'))) {
+				$rentan2 += $cp['nominal'];
+			}
+		}
+
+		$rentan_all = 0;
+		foreach ($history_pembayaran as $key => $hp) {
+			$rentan_all += $hp['nominal'];
+		}
+
+		$msg['jml_pendapatan'] = $rentan1 + $rentan2;
+		$msg['sudah_terbayar'] = $rentan_all;
+
+		// print_r($msg);die;
+		return $msg;
+	}
+
+	public function all($limit, $start)
+	{
+		$msg = [];
+		$user_id = get_user()['id'];
 		$filter = $this->input->get();
 		$pelanggan = $this->input->get('pelanggan');
 		$desa = $this->input->get('desa');
+		$pembayaran = $this->input->get('pembayaran');
+
+		if (!empty($filter)) {
+			if (!empty($pembayaran)) {
+				$msg = ['status' => 'danger', 'msg' => 'Pembayaran gagal dilakukan'];
+				$bind_config = $this->db->get_where('config_pembayaran', ['id'=>$pembayaran])->row_array();
+
+				if ($this->db->insert('history_pembayaran', [
+					'config_pembayaran_id' => $pembayaran,
+					'user_id' => $user_id
+				])) {
+					$msg = ['status' => 'success', 'msg' => 'Pembayaran atas nama ' . get_name_pelanggan($bind_config['pelanggan_id']) . ' berhasil'];
+				}else{
+					$msg['msgs'][] = 'Pembayaran atas nama ' . get_name_pelanggan($bind_config['pelanggan_id']) . ' gagal';
+				}
+			}
+		}
 
 		$this->db->select('a.id, nama, b.desa, b.desa_id, nominal, jatuh_tempo, rentan');
 		$this->db->from('config_pembayaran a');
@@ -20,6 +73,7 @@ class Laporan_keuangan_model extends CI_model
 			}
 		}
 		$this->db->order_by('b.desa ASC');
+		$this->db->limit($limit, $start);
 		$msg['data'] = $this->db->get()->result_array();
 
 		$this->db->select('config_pembayaran_id');
@@ -42,9 +96,57 @@ class Laporan_keuangan_model extends CI_model
 			$msg['history_month'] = [$value['config_pembayaran_id']];
 		}
 
-		// print_r($msg['data']);die;
+		return $msg;
+	}
+
+	public function history_pembayaran($limit, $start)
+	{
+		$msg = [];
+		$filter = $this->input->get();
+		$pelanggan = $this->input->get('pelanggan');
+		$desa = $this->input->get('desa');
+
+		$this->db->select('a.id, a.created, c.nama, c.desa, c.desa_id, b.nominal, b.jatuh_tempo, b.rentan');
+		$this->db->from('history_pembayaran a');
+		$this->db->join('config_pembayaran b', 'b.id=a.config_pembayaran_id', 'inner');
+		$this->db->join('pelanggan c', 'c.id=b.pelanggan_id', 'inner');
+		if (!empty($filter)) {
+			if (!empty($pelanggan)) {
+				$this->db->like('c.id', $pelanggan);
+			}elseif (!empty($desa)) {
+				$this->db->like('c.desa_id', $desa);
+			}
+		}
+		$this->db->order_by('c.created DESC');
+		$this->db->limit($limit, $start);
+		$msg['data'] = $this->db->get()->result_array();
 
 		return $msg;
+	}
+
+	public function count_history_pembayaran()
+	{
+		$filter = $this->input->get();
+		$pelanggan = $this->input->get('pelanggan');
+		$desa = $this->input->get('desa');
+		if (!empty($filter)) {
+			$this->db->select('a.id');
+			$this->db->from('history_pembayaran a');
+			$this->db->join('config_pembayaran b', 'b.id=a.config_pembayaran_id', 'inner');
+			$this->db->join('pelanggan c', 'c.id=b.pelanggan_id', 'inner');
+			if (!empty($pelanggan)) {
+				$this->db->like('c.id', $pelanggan);
+			}elseif (!empty($desa)) {
+				$this->db->like('c.desa_id', $desa);
+			}
+			return $this->db->get()->num_rows();
+		}else{
+			$this->db->select('a.id');
+			$this->db->from('history_pembayaran a');
+			$this->db->join('config_pembayaran b', 'b.id=a.config_pembayaran_id', 'inner');
+			$this->db->join('pelanggan c', 'c.id=b.pelanggan_id', 'inner');
+			return $this->db->get()->num_rows();
+		}
 	}
 
 	public function count_pembayaran()
