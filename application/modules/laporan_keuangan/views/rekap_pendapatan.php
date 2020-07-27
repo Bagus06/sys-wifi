@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
 	<!-- Small boxes (Stat box) -->
-	<div class="row">
+	<div class="">
 		<div class="col-lg-12 col-6">
 			<!-- small box -->
 			<div class="small-box bg-success">
