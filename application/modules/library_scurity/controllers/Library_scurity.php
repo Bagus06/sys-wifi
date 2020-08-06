@@ -10,7 +10,7 @@ class Library_scurity extends CI_Controller
 		$this->load->model('pelanggan/pelanggan_model');
 	}
 
-	public function list()
+	public function list($id = 0)
 	{
 		// PAGINATION
 		$this->load->library('pagination');
@@ -62,11 +62,12 @@ class Library_scurity extends CI_Controller
 			$url = 0;
 		}
 
-		$data = $this->library_scurity_model->all($config['per_page'], $url);
+		$data = $this->library_scurity_model->all($id, $config['per_page'], $url);
 		// echo "<pre>";
 		// print_r($data);die;
 		// echo "</pre>";
 		$data['url'] = $url;
+		$data['pelanggan'] = $this->pelanggan_model->for_api();
 		$this->load->view('index', ['data'=>$data]);
 	}
 
