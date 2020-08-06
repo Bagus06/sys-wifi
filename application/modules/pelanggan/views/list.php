@@ -44,7 +44,7 @@
 		<div class="card-header pb-0">
 			<form action="" method="post">
 				<div class="text-right input-group input-group-sm col-md-4">
-					<input type="text" name="search" class="form-control" placeholder="Search by name">
+					<input type="text" name="search" class="form-control" onkeyup="this.value = this.value.toUpperCase()" placeholder="Search by name">
 					<span class="input-group-append">
 						<button type="submit" class="btn btn-info btn-flat"><i class="fas fa-search"></i></button>
 					</span>

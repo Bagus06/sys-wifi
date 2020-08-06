@@ -203,6 +203,28 @@
 											</tr>
 										<?php endforeach ?>
 									</table>
+									<table class="col-md-12" border="1" style="margin: 0px">
+										<tr>
+											<th colspan="4" style="text-align: center">
+												<h2><b><i>IP DIPAKAI</i></b></h2>
+											</th>
+										</tr>
+										<tr style="text-align: center">
+											<th style="width: 7%;">No.</th>
+											<th><b>IP</b></th>
+											<th>Username</th>
+											<th>Password</th>
+										</tr>
+										<?php $i=0; ?>
+										<?php foreach ($data['ip'] as $key => $vip): ?>
+											<tr>
+												<td style=" text-align: center"><?php echo ++$i; ?></td>
+												<td><?php echo $vip['ip'] ?></td>
+												<td><?php echo $vip['username'] ?></td>
+												<td><?php echo $vip['password'] ?></td>
+											</tr>
+										<?php endforeach ?>
+									</table>
 								</div>
 							</div>
 						</div>

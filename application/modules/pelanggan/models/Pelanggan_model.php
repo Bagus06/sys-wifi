@@ -442,6 +442,11 @@ class Pelanggan_model extends CI_model
 		$this->db->join('jenis_alat c', 'c.id=b.alat_jenis_id', 'inner');
 		$this->db->where('a.pelanggan_id', $id);
 		$msg['alat'] = $this->db->get()->result_array();
+
+		$this->db->from('library_scurity');
+		$this->db->where('pelanggan_id', $id);
+		$msg['ip'] = $this->db->get()->result_array();
+		
 		return $msg;
 	}
 

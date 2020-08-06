@@ -39,7 +39,7 @@
 				</div>
 				<div class="form-group">
 					<label for="kk">No KK</label>
-					<input type="number" class="form-control" name="kk" placeholder="kk" value="<?php echo @$data['data']['kk'] ?>" required>
+					<input type="text" class="form-control" name="kk" placeholder="kk" value="<?php echo @$data['data']['kk'] ?>" required>
 				</div>
 				<div class="form-group">
 					<label for="">Provinsi</label>
