@@ -21,7 +21,7 @@
 			<div class="panel-body card-body">
 				<div class="form-group">
 					<label for="">Keterangan <small style="color:red"><i>*masukkan satu agenda dan tambah agenda lagi jika masih ada agenda lain</i></small></label>
-					<textarea placeholder="Tulis keterangan agenda" name="ket" id="" cols="20" rows="5" class="form-control" onkeyup="this.value = this.value.toUpperCase()" value="<?php echo @$data['data']['ket'] ?>" required><?php echo @$data['data']['ket'] ?></textarea>
+					<textarea placeholder="Tulis keterangan agenda" name="ket" id="" cols="20" rows="5" class="form-control" value="<?php echo @$data['data']['ket'] ?>" required><?php echo @$data['data']['ket'] ?></textarea>
 				</div>
 			</div>
 			<div class="panel-footer card-footer">

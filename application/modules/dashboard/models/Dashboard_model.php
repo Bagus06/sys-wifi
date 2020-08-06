@@ -40,6 +40,36 @@ class Dashboard_model extends CI_model
 			}
 		}
 
+		$msg['agndm']	= [];
+		$msg['agndbs']	= [];
+
+		$this->db->select('status');
+		$bind_agenda = $this->db->get('agenda')->result_array();
+
+		foreach ($bind_agenda as $key => $vba) {
+			if ($vba['status'] == 1) {
+				$msg['agndm'][$key]	= [$vba];
+			}
+			if ($vba['status'] == 2) {
+				$msg['agndbs'][$key]	= [$vba];
+			}
+		}
+
+		$msg['lhi']		= [];
+		$msg['lbi']	= [];
+
+		$this->db->select('created');
+		$bind_laporan = $this->db->get('laporan')->result_array();
+
+		foreach ($bind_laporan as $key => $vbl) {
+			if (echo_date($vbl['created']) == date("j F Y")) {
+				$msg['lhi'][$key]	= [$vbl];
+			}
+			if (echo_date_month($vbl['created']) == date("F")) {
+				$msg['lbi'][$key]	= [$vbl];
+			}
+		}
+
 		$templevelpa='-';
 		$newkeypa=0;
 		$grouparrpa[$templevelpa]="";

@@ -9,6 +9,11 @@
     <div class="card-body">
       <form action="" method="get">
         <div class="col-md-12 row" style="margin: 1px">
+          <?php if (empty($this->input->get('date'))): ?>
+            <?php if (!empty($this->input->get('bi'))): ?>
+              <input type="hidden" name="bi" value="<?php echo @$this->input->get('bi') ?>">
+            <?php endif ?>
+          <?php endif ?>
           <div class="form-group col-md-5">
             <label>Tanggal </label>
             <div class="input-group">

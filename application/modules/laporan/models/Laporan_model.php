@@ -10,11 +10,20 @@ class Laporan_model extends CI_model
 		$filter = $this->input->get();
 		$filter_by_date = $this->input->get('date');
 		$filter_by_name = $this->input->get('karyawan');
+		$filter_by_bi = $this->input->get('bi');
 
 		if (!empty($filter)) {
+			if (empty($filter_by_date)) {
+				if (!empty($filter_by_bi)) {
+					$this->db->like('created', $filter_by_bi, 'after');
+					if (!empty($filter_by_name)) {
+						$this->db->like('user_id', $filter_by_name);
+					}
+				}
+			}
 			if (!empty($filter_by_date)) {
 				$this->db->like('created', $filter_by_date);
-			}else{
+			}elseif(empty($filter_by_date) && empty($filter_by_bi)){
 				$this->db->like('created', $date);
 			}
 			if (!empty($filter_by_name)) {
@@ -24,6 +33,7 @@ class Laporan_model extends CI_model
 			$this->db->like('created', $date);
 		}
 		$msg['data'] = $this->db->get('laporan')->result_array();
+		// print_r($this->db->last_query());die;
 		return $msg;
 	}
 

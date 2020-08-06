@@ -329,7 +329,9 @@ class Pemasangan_model extends CI_model
 	{
 		$data = [
 			'0' => ['id' => '1', 'title' => 'PTP'],
-			'1' => ['id' => '2', 'title' => 'PTMP'],
+			'1' => ['id' => '2', 'title' => 'PTP (INDUK)'],
+			'2' => ['id' => '3', 'title' => 'PTMP'],
+			'3' => ['id' => '4', 'title' => 'PULL WIRES'],
 		];
 		return $data;
 	}

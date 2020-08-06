@@ -3,7 +3,7 @@
 <section class="content">
 
   <!-- Default box -->
-  <div class="card col-md-6">
+  <div class="card col-md-12">
     <div class="card-header">
       <h3 class="card-title">Projects</h3>
 
@@ -48,6 +48,7 @@
                 <?php endforeach ?>
               </tbody>
             </table>
+            <?php echo $this->pagination->create_links(); ?>
           </div>
         </div>
         <!-- /.card-body -->

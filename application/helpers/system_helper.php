@@ -128,6 +128,10 @@ function echo_date($date){
 	return date("j F Y", strtotime(@$date));
 }
 
+function echo_date_month($date){
+	return date("F", strtotime(@$date));
+}
+
 function echo_time($time){
 	return date("g:i a", strtotime(@$time));
 }
@@ -136,5 +140,9 @@ function money($nominal){
 	
 	$covert = "Rp " . number_format($nominal,2,',','.');
 	return $covert;
- 
+}
+
+function preg_angka($string){
+	$result = preg_replace("/[^0-9]/", "", $string);
+	return $result;
 }

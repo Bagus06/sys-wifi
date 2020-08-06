@@ -46,5 +46,17 @@ function count_p()
 	 $ci->db->where('active', 5);
 	 $pelanggan['dc'] = $ci->db->get('pelanggan')->num_rows();
 
+	 $ci->db->where('metode', 1);
+	 $pelanggan['ptp'] = $ci->db->get('pemasangan')->num_rows();
+
+	 $ci->db->where('metode', 2);
+	 $pelanggan['ptpi'] = $ci->db->get('pemasangan')->num_rows();
+
+	 $ci->db->where('metode', 3);
+	 $pelanggan['ptmp'] = $ci->db->get('pemasangan')->num_rows();
+
+	 $ci->db->where('metode', 4);
+	 $pelanggan['pw'] = $ci->db->get('pemasangan')->num_rows();
+
 	 return $pelanggan;
 }

@@ -45,21 +45,29 @@ if ($link1 == 'agenda') {
 	}
 }
 
-if ($link1 == 'library_scurity') {
-	$mo7 = 'menu-open';
-	$ma7 = 'active';
-	if ($link2 == 'list') {
-		$lls = 'active';
-	}elseif ($link2 == 'edit') {
-		$tls = 'active';
-	}
-}
-
 if ($link1 == 'laporan_keuangan') {
 	$mo7 = 'menu-open';
 	$ma7 = 'active';
 	if ($link2 == 'list') {
 		$lk = 'active';
+	}elseif ($link2 == 'edit_config') {
+		$tcp = 'active';
+	}elseif ($link2 == 'list_config') {
+		$lcp = 'active';
+	}elseif ($link2 == 'history_pembayaran') {
+		$hp = 'active';
+	}elseif ($link2 == 'rekap_pendapatan') {
+		$rp = 'active';
+	}
+}
+
+if ($link1 == 'library_scurity') {
+	$mo8 = 'menu-open';
+	$ma8 = 'active';
+	if ($link2 == 'list') {
+		$lls = 'active';
+	}elseif ($link2 == 'edit') {
+		$tls = 'active';
 	}
 }
 
@@ -318,30 +326,30 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 			</li>
 		</ul>
 	</li>
-	<li class="nav-item has-treeview <?php echo @$mo7; ?>">
-		<a href="#" class="nav-link <?php echo @$ma7; ?>">
-			<i class="nav-icon fas fa-laptop"></i>
-			<p>
-				LIBRARY SCURITY
-				<i class="fas fa-angle-left right"></i>
-			</p>
-		</a>
-		<ul class="nav nav-treeview">
-			<li class="nav-item">
-				<a href="<?php echo base_url("library_scurity/edit") ?>" class="nav-link <?php echo @$tls; ?>">
-					<i class="far fa-circle nav-icon"></i>
-					<p>Tambah Scurity</p>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a href="<?php echo base_url("library_scurity/list") ?>" class="nav-link <?php echo @$lls; ?>">
-					<i class="far fa-circle nav-icon"></i>
-					<p>List Scurity</p>
-				</a>
-			</li>
-		</ul>
-	</li>
 <?php endif ?>
+<li class="nav-item has-treeview <?php echo @$mo8; ?>">
+	<a href="#" class="nav-link <?php echo @$ma8; ?>">
+		<i class="nav-icon fas fa-laptop"></i>
+		<p>
+			LIBRARY SCURITY
+			<i class="fas fa-angle-left right"></i>
+		</p>
+	</a>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url("library_scurity/edit") ?>" class="nav-link <?php echo @$tls; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Tambah Scurity</p>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a href="<?php echo base_url("library_scurity/list") ?>" class="nav-link <?php echo @$lls; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>List Scurity</p>
+			</a>
+		</li>
+	</ul>
+</li>
 <li class="nav-item has-treeview <?php echo @$mo5; ?>">
 	<a href="#" class="nav-link <?php echo @$ma5; ?>">
 		<i class="nav-icon fas fa-atlas"></i>
@@ -408,12 +416,56 @@ if ($link1 == 'maintance' || $link1 == 'list') {
 		</li>
 	</ul>
 </li>
-<li class="nav-item">
-	<a href="<?php echo base_url('laporan_keuangan/list'); ?>" class="nav-link <?php echo @$lk; ?>">
+<?php if (is_admin()): ?>
+<li class="nav-item has-treeview <?php echo @$mo7; ?>">
+	<a href="#" class="nav-link <?php echo @$ma7; ?>">
 		<i class="nav-icon fas fa-funnel-dollar"></i>
 		<p>
 			LAPORAN KEUANGAN
+			<i class="fas fa-angle-left right"></i>
+			<!-- <br><small>Trial</small> -->
 		</p>
 	</a>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/edit_config'); ?>" class="nav-link <?php echo @$tcp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Tambah Config</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/list_config'); ?>" class="nav-link <?php echo @$lcp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>List Config</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/list'); ?>" class="nav-link <?php echo @$lk; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Pembayaran</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/history_pembayaran'); ?>" class="nav-link <?php echo @$hp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>History Pembayaran</p>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav nav-treeview">
+		<li class="nav-item">
+			<a href="<?php echo base_url('laporan_keuangan/rekap_pendapatan'); ?>" class="nav-link <?php echo @$rp; ?>">
+				<i class="far fa-circle nav-icon"></i>
+				<p>Rekap Pendapatan</p>
+			</a>
+		</li>
+	</ul>
 </li>
+<?php endif ?>
 <?php endif; ?>
