@@ -30,7 +30,7 @@ class Laporan_keuangan extends CI_Controller
 
 		if ($this->input->get()) {
 			$config['reuse_query_string'] = TRUE;
-			$config['suffix'] = '?desa=' . $this->input->get('desa') . '&pelanggan=' . $this->input->get('pelanggan');
+			$config['suffix'] = '?rentan=' . $this->input->get('rentan') . '&desa=' . $this->input->get('desa') . '&pelanggan=' . $this->input->get('pelanggan');
 			$config['use_global_url_suffix'] = TRUE;
 		}
 

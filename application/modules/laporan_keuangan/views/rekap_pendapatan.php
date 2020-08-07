@@ -13,7 +13,10 @@
 				<div class="icon">
 					
 				</div>
-				<a href="#" class="small-box-footer">Info lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+				<hr>
+				<a href="<?php echo base_url('laporan_keuangan/list?desa=0&pelanggan=0&rentan=1'); ?>" class="small-box-footer">Info lebih lanjut bulanan<i class="fas fa-arrow-circle-right"></i></a>
+				<hr>
+				<a href="<?php echo base_url('laporan_keuangan/list?desa=0&pelanggan=0&rentan=2'); ?>" class="small-box-footer">Info lebih lanjut tahunan<i class="fas fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->

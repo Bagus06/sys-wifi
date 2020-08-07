@@ -132,6 +132,10 @@ function echo_date_month($date){
 	return date("F", strtotime(@$date));
 }
 
+function echo_date_year($date){
+	return date("Y", strtotime(@$date));
+}
+
 function echo_time($time){
 	return date("g:i a", strtotime(@$time));
 }

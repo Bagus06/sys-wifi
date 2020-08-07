@@ -36,7 +36,7 @@
         				<?php endif ?>
         				<?php if (!empty($this->input->get('desa'))): ?>
         					<?php if ($vp['desa_id'] == @$this->input->get('desa')): ?>
-	        					<option value="<?php echo $vp['id'] ?>" <?php echo $selected; ?>><?php echo $vp['nama'] ?><?php echo $vp['desa_id'] ?></option>
+	        					<option value="<?php echo $vp['id'] ?>" <?php echo $selected; ?>><?php echo $vp['nama'] ?></option>
 	        				<?php endif ?>
 	        			<?php elseif (empty($this->input->get('desa'))): ?>
         					<option value="<?php echo $vp['id'] ?>" <?php echo $selected; ?>><?php echo $vp['nama'] ?></option>
@@ -44,6 +44,19 @@
         			<?php endforeach ?>
         		</select>
         	</div>
+          <div class="form-group col-md-5">
+            <label>Tempo</label>
+            <select name="rentan" class="form-control select2" style="width: 100%;">
+              <option value="0">none</option>
+              <?php foreach ($tempo as $key => $vt): ?>
+                  <?php $selected = ''; ?>
+                  <?php if ($vt['id'] == @$this->input->get('rentan')): ?>
+                    <?php $selected='selected' ?>
+                  <?php endif ?>
+                  <option value="<?php echo $vt['id'] ?>" <?php echo $selected; ?>><?php echo $vt['title'] ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
           <div class="col-md-1" style="text-align: right; padding-top: 3%">
             <button type="submit" class="btn btn-success">Filter</button>
           </div>

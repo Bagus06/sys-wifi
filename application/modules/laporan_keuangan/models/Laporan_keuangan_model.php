@@ -5,7 +5,7 @@ class Laporan_keuangan_model extends CI_model
 	public function rekap_pendapatan()
 	{
 		$msg = [];
-		$this->db->select('id, nominal, rentan, jatuh_tempo');
+		$this->db->select('id, nominal, rentan, jatuh_tempo, created');
 		$this->db->from('config_pembayaran');
 		$config_pembayaran = $this->db->get()->result_array();
 
@@ -20,7 +20,7 @@ class Laporan_keuangan_model extends CI_model
 		foreach ($config_pembayaran as $key => $cp) {
 			if ($cp['rentan'] == 1) {
 				$rentan1 += $cp['nominal'];
-			}elseif (($cp['rentan'] == 2) && ($cp['jatuh_tempo'] == date('m'))) {
+			}elseif (($cp['rentan'] == 2) && (echo_date_year($cp['created']) != date('Y')) && ($cp['jatuh_tempo'] == date('m'))) {
 				$rentan2 += $cp['nominal'];
 			}
 		}
@@ -40,8 +40,13 @@ class Laporan_keuangan_model extends CI_model
 	public function all($limit, $start)
 	{
 		$msg = [];
+		$date =  date('m');
+		if (substr(trim($date), 0, 1) == 0) {
+			$date = substr(trim(date('m')), 1);
+		}
 		$user_id = get_user()['id'];
 		$filter = $this->input->get();
+		$rentan = $this->input->get('rentan');
 		$pelanggan = $this->input->get('pelanggan');
 		$desa = $this->input->get('desa');
 		$pembayaran = $this->input->get('pembayaran');
@@ -67,9 +72,15 @@ class Laporan_keuangan_model extends CI_model
 		$this->db->join('pelanggan b', 'b.id=a.pelanggan_id', 'inner');
 		if (!empty($filter)) {
 			if (!empty($pelanggan)) {
-				$this->db->like('b.id', $pelanggan);
+				$this->db->where('b.id', $pelanggan);
 			}elseif (!empty($desa)) {
-				$this->db->like('b.desa_id', $desa);
+				$this->db->where('b.desa_id', $desa);
+			}elseif(!empty($rentan)){
+				$this->db->like('a.rentan', $rentan);
+				if ($rentan == 2) {
+					$this->db->like('a.jatuh_tempo', $date);
+					$this->db->not_like('a.created', date('Y'), 'after');
+				}
 			}
 		}
 		$this->db->order_by('b.desa ASC');
@@ -158,6 +169,11 @@ class Laporan_keuangan_model extends CI_model
 	public function count_pembayaran()
 	{
 		$filter = $this->input->get();
+		$date =  date('m');
+		if (substr(trim($date), 0, 1) == 0) {
+			$date = substr(trim(date('m')), 1);
+		}
+		$rentan = $this->input->get('rentan');
 		$pelanggan = $this->input->get('pelanggan');
 		$desa = $this->input->get('desa');
 		if (!empty($filter)) {
@@ -168,6 +184,11 @@ class Laporan_keuangan_model extends CI_model
 				$this->db->like('b.id', $pelanggan);
 			}elseif (!empty($desa)) {
 				$this->db->like('b.desa_id', $desa);
+			}elseif(!empty($rentan)){
+				$this->db->like('a.rentan', $rentan);
+				if ($rentan == 2) {
+					$this->db->like('a.jatuh_tempo', $date);
+				}
 			}
 			return $this->db->get()->num_rows();
 		}else{
